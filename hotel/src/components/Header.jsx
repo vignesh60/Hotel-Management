@@ -9,19 +9,19 @@ import $ from "jquery";
 
 const Header = () => {
   const handleSideBar = () => {
-    $(".main-container").css({display: "block"});
+    $(".main-container").css({ display: "block" });
     setTimeout(() => {
-      $(".sideBar-container").css({transform: "translateX(0%)"})
-    },10)
-  }
+      $(".sideBar-container").css({ transform: "translateX(0%)" });
+    }, 10);
+  };
   return (
     <nav>
       <div className="container nav_container">
         <div className="sidebar_logo">
-        <HiMiniBars3 className='bar-icon' onClick={() => handleSideBar()}/>
-        <Link to="/" className="nav_logo">
-          <img src={Logo} alt="Navbar logo" className="site-logo"/>
-        </Link>
+          <HiMiniBars3 className="bar-icon" onClick={() => handleSideBar()} />
+          <Link to="/" className="nav_logo">
+            <img src={Logo} alt="Navbar logo" className="site-logo" />
+          </Link>
         </div>
         <div className="search_container">
           <input type="text" placeholder="search" />
@@ -32,8 +32,8 @@ const Header = () => {
           <div className="notification">
             <IoNotificationsOutline className="icon" />
           </div>
-          <Link to='/profile'>
-          <img src={Profile} alt="Profile" className="profile" />
+          <Link to="/profile">
+            <img src={Profile} alt="Profile" className="profile" />
           </Link>
         </div>
       </div>
