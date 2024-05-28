@@ -8,12 +8,33 @@
   outline: 0;
   font-family: 'Poppins', sans-serif;
   scroll-behavior: smooth;
+  list-style: none;
 }
 
 :root {
     --color-black: #000;
     --color-white: #fff;
     --color-blue: #2591f7;
+    --color-yellow: #FEBB02;
+}
+
+.btn {
+    padding: 0.7rem 3rem;
+    border-radius: 5px;
+    background: var(--color-blue);
+    color: var(--color-white);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #1f7acf;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 
@@ -31,6 +52,7 @@
     box-shadow: 0 1px 10px -5px #000;
     position: fixed;
     z-index: 40;
+    background: var(--color-white);
   }
   
   .search_container {
@@ -99,24 +121,145 @@
   =============================home======================= */
 
   .home-container {
-    padding: 6rem 1rem 1rem 1rem;
+    padding: 5.5rem 1rem 1rem 1rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 3rem;
   }
 
   .home-container .banner-container {
     background-image: url('./components//assets/background.png');
     background-size: cover;
     background-position: center;
-    border-radius: 10px;
-    padding: 10% 5%;
+    border-radius: 1rem;
+    padding: 11% 5%;
   }
 
   .banner-container h1 {
     font-size: 5vw;
   }
 
+  .home-container .luxurious-room {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+  }
+
+  .luxurious-room .right-field img {
+    width: 100%;
+    border-radius: 1rem;
+  }
+
+  .luxurious-room .left-field {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .luxurious-room .left-field h1{ 
+    font-size: 3vw;
+  }
+
+  .luxurious-room .left-field button {
+    width: 15rem;
+  }
+
+  .home-container .rooms-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .rooms-container .cards-container .card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 0.6rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: 0.4s;
+    border: 1px solid transparent;
+  }
+
+  .rooms-container .cards-container .card:hover {
+    box-shadow: 0 0 20px rgba(0,0,0,0.30);
+    border: 1px solid var(--color-blue);
+  }
+
+  .cards-container .card img {
+    width: 100%;
+    border-radius: 1rem;
+  }
+
+  .card ul li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .card h2 {
+    font-size: 1.5rem;
+  }
+
+  .card p {
+    color: var(--color-yellow);
+  }
+  .card .cost {
+    color: var(--color-blue);
+    font-size: 1.2rem;
+  }
+
+  .card ul li .icon {
+    font-size: 1.5rem;
+  }
+
+  .card .rating-field {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .card .rating {
+    background: #029a5b;
+    padding: 2px 5px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border-radius: 5px;
+    color: var(--color-white);
+    font-size: 0.8rem;
+  }
+
+  .rooms-container h1 {
+    color: var(--color-blue);
+    font-size: 3rem;
+  }
+
+  .rooms-container .cards-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill,minmax(350px,1fr));
+    gap: 1rem;
+    row-gap: 2rem;
+  }
+
+
+  @media(max-width:800px){
+    .rooms-container .cards-container {
+        grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+        gap: 1rem;
+      }
+      .home-container .luxurious-room {
+        grid-template-columns: 1fr;
+      }
+      .luxurious-room h1 {
+        font-size: 1.4rem !important;
+      }
+      .rooms-container h1 {
+        font-size: 1.8rem;
+      }
+  }
 
 
 
@@ -159,15 +302,15 @@
   
   .footer .col a {
     text-decoration: none;
-    color: var(--color-icon);
     display: block;
     font-size: 14px;
     margin-bottom: 10px;
     transition: 0.1s;
+    color:var(--color-black);
   }
   
   .footer .col a:hover {
-    color: var(--color-white);
+    color: var(--color-blue);
   }
   
   .footer .row {
