@@ -266,6 +266,44 @@
 
 
 
+/*   =====================room-details================================ */
+
+.room-details-container {
+    padding: 6rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.room-details-container .rooms-iamge-field {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.rooms-iamge-field .image-left-field{
+    border-radius: 1rem 0 0 1rem;
+    overflow: hidden;
+}
+
+.rooms-iamge-field .image-right-field {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 0.5rem;
+    border-radius: 0 1rem 1rem 0;
+    overflow: hidden;
+}
+
+.rooms-iamge-field img {
+    width: 100%;
+    border-radius: 0.4rem;
+}
+
+
+
+
+
+
 
 
 
