@@ -16,7 +16,7 @@ import a_icon7 from "../components/assets/a-icons (7).png";
 import a_icon8 from "../components/assets/a-icons (8).png";
 import a_icon9 from "../components/assets/a-icons (9).png";
 import a_icon10 from "../components/assets/a-icons (10).png";
-
+import SwiperRooms from "../SwiperRooms";
 
 const RoomDetails = () => {
   const [img, setImg] = useState([img2, img3, img4, img5]);
@@ -111,21 +111,70 @@ const RoomDetails = () => {
           <h1>Amenities</h1>
           <div className="row">
             <ul className="col">
-              <li><img src={a_icon1} alt="icon" /> Garden view</li>
-              <li><img src={a_icon2} alt="icon" /> Wifi</li>
-              <li><img src={a_icon3} alt="icon" /> Free washer - in building</li>
-              <li><img src={a_icon4} alt="icon" /> Central air conditioning</li>
-              <li><img src={a_icon5} alt="icon" /> Refrigerator</li>
+              <li>
+                <img src={a_icon1} alt="icon" /> Garden view
+              </li>
+              <li>
+                <img src={a_icon2} alt="icon" /> Wifi
+              </li>
+              <li>
+                <img src={a_icon3} alt="icon" /> Free washer - in building
+              </li>
+              <li>
+                <img src={a_icon4} alt="icon" /> Central air conditioning
+              </li>
+              <li>
+                <img src={a_icon5} alt="icon" /> Refrigerator
+              </li>
             </ul>
             <ul className="col">
-            <li><img src={a_icon6} alt="icon" /> Kitchen</li>
-              <li><img src={a_icon7} alt="icon" /> Pets allowed</li>
-              <li><img src={a_icon8} alt="icon" /> Dryer</li>
-              <li><img src={a_icon9} alt="icon" /> Security cameras on property</li>
-              <li><img src={a_icon10} alt="icon" /> Bicycles</li>
+              <li>
+                <img src={a_icon6} alt="icon" /> Kitchen
+              </li>
+              <li>
+                <img src={a_icon8} alt="icon" /> Pets allowed
+              </li>
+              <li>
+                <img src={a_icon10} alt="icon" /> Dryer
+              </li>
+              <li>
+                <img src={a_icon9} alt="icon" /> Security cameras on property
+              </li>
+              <li>
+                <img src={a_icon7} alt="icon" /> Bicycles
+              </li>
             </ul>
           </div>
         </div>
+        <div className="rating-reviews" style={{marginTop: "3rem"}}>
+          <h1>Rating & Reviews</h1>
+          <span className="rate">
+            <span className="rating">
+              4.5 <FaStar />
+            </span>
+            <p>(600+ reviews)</p>
+          </span>
+          <div className="grids">
+            <ul>
+              <li>
+                5 <FaStar /> <span className="five-star">.</span> 82%
+              </li>
+              <li>
+                4 <FaStar /> <span className="four-star">.</span> 26%
+              </li>
+              <li>
+                3 <FaStar /> <span className="three-star">.</span> 12%
+              </li>
+              <li>
+                2 <FaStar /> <span className="two-star">.</span> 05%
+              </li>
+              <li>
+                1 <FaStar /> <span className="one-star">.</span> 06%
+              </li>
+            </ul>
+          </div>
+        </div>
+        <SwiperRooms />
       </div>
     </div>
   );
