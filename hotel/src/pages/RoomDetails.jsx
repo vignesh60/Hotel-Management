@@ -21,9 +21,9 @@ import SwiperRooms from "../SwiperRooms";
 const RoomDetails = () => {
   const [img, setImg] = useState([img2, img3, img4, img5]);
 
-  /* useEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
-  }); */
+  });
 
   return (
     <div className="room-details-container">
