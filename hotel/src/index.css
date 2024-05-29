@@ -37,6 +37,11 @@
     justify-content: space-between;
 }
 
+a {
+    text-decoration: none;
+    color: var(--color-black);
+}
+
 
 
 
@@ -345,6 +350,59 @@
     gap: 5px;
     align-items: center;
     justify-content: center;
+}
+
+
+.cost-and-book .booking-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.booking-card .dates-field {
+  display: flex;
+  gap: 1rem;
+  border: 2px solid #ddd;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.dates-field span {
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.booking-card .dates-field span:first-child {
+  border-right: 2px solid #ddd;
+}
+
+.dates-field span {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.booking-card ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  border-bottom: 2px solid #ddd;
+  padding: 1rem 0;
+}
+
+.booking-card ul li,.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.booking-card ul li p:last-child {
+  font-weight: 500;
 }
 
 
