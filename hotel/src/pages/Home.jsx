@@ -13,7 +13,7 @@ import room6 from "../components/assets/room (6).png";
 import room9 from "../components/assets/room (9).png";
 import room8 from "../components/assets/room (8).png";
 import room10 from "../components/assets/room (10).png";
-import swimming from '../components/assets/room (7).png'
+import swimming from "../components/assets/room (7).png";
 
 const Home = () => {
   const [cards, setCards] = useState([
@@ -62,26 +62,30 @@ const Home = () => {
           {cards.map((card, index) => (
             <div className="card" key={index}>
               <img src={card} alt="loading" />
-              <h2>Well Furnished Apartment</h2>
-              <span className="rating-field">
-                <span className="rating">4.5 <FaStar /></span>
-                <p>(600+) rating</p>
-              </span>
-              <p>100 Smart Street, LA, India</p>
-              <p className="cost">
-                <b>$2015</b> / 5 night
-              </p>
-              <ul className="flex">
-                <li>
-                  <IoBedOutline className="icon" /> 4 Beds
-                </li>
-                <li>
-                  <HiOutlineUser className="icon" /> 8 Sleeps
-                </li>
-                <li>
-                  <TbArrowAutofitHeight className="icon" /> 1,340 Sq Ft
-                </li>
-              </ul>
+              <div className="info">
+                <h2>Well Furnished Apartment</h2>
+                <span className="rating-field">
+                  <span className="rating">
+                    4.5 <FaStar />
+                  </span>
+                  <p>(600+ reviews)</p>
+                </span>
+                <p>100 Smart Street, LA, India</p>
+                <p className="cost">
+                  <b>$2015</b> / 5 night
+                </p>
+                <ul className="flex">
+                  <li>
+                    <IoBedOutline className="icon" /> 4 Beds
+                  </li>
+                  <li>
+                    <HiOutlineUser className="icon" /> 8 Sleeps
+                  </li>
+                  <li>
+                    <TbArrowAutofitHeight className="icon" /> 1,340 Sq Ft
+                  </li>
+                </ul>
+              </div>
             </div>
           ))}
         </div>
@@ -94,9 +98,8 @@ const Home = () => {
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum
             aliquid alias libero dolor? Libero ut officia veniam vero temporibus
             id veritatis magnam? Commodi et illum beatae ex dignissimos ipsa
-            ullam.Libero ut officia veniam vero temporibus
-            id veritatis magnam? Commodi et illum beatae ex dignissimos ipsa
-            ullam.
+            ullam.Libero ut officia veniam vero temporibus id veritatis magnam?
+            Commodi et illum beatae ex dignissimos ipsa ullam.
           </p>
           <button className="btn">Book</button>
         </div>

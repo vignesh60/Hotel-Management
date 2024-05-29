@@ -193,6 +193,11 @@
     border-radius: 1rem;
   }
 
+  .card ul {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
   .card ul li {
     display: flex;
     align-items: center;
@@ -220,7 +225,7 @@
     gap: 1rem;
   }
 
-  .card .rating {
+.rating {
     background: #029a5b;
     padding: 2px 5px;
     display: flex;
@@ -244,10 +249,16 @@
     row-gap: 2rem;
   }
 
+  .card .info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
 
   @media(max-width:800px){
     .rooms-container .cards-container {
-        grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+        grid-template-columns: repeat(auto-fill,minmax(400px,1fr));
         gap: 1rem;
       }
       .home-container .luxurious-room {
@@ -259,6 +270,25 @@
       .rooms-container h1 {
         font-size: 1.8rem;
       }
+      .card {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+      }
+  }
+
+  @media(max-width:500px){
+    .card h2{
+        font-size: 1rem !important;
+    }
+    .card p{
+        font-size: 0.7rem !important;
+    }
+    .card li{
+        font-size: 0.6rem;
+    }
+    .card li .icon{
+        font-size: 1rem !important;
+    }
   }
 
 
@@ -297,6 +327,24 @@
 .rooms-iamge-field img {
     width: 100%;
     border-radius: 0.4rem;
+}
+
+.about-room-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+}
+
+.about-room-container .about-room,.rate {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.about-room .rate {
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
 }
 
 
