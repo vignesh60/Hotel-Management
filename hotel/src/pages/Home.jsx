@@ -15,6 +15,7 @@ import room8 from "../components/assets/room (8).png";
 import room10 from "../components/assets/room (10).png";
 import swimming from "../components/assets/room (7).png";
 import { Link } from "react-router-dom";
+import SwiperRooms from "../SwiperRooms";
 
 const Home = () => {
   const [cards, setCards] = useState([
@@ -110,6 +111,7 @@ const Home = () => {
           <img src={swimming} alt="loading" />
         </div>
       </div>
+      <SwiperRooms />
     </div>
   );
 };

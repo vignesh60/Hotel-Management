@@ -160,10 +160,10 @@ const RoomDetails = () => {
                 5 <FaStar /> <span className="five-star">.</span> 82%
               </li>
               <li>
-                4 <FaStar /> <span className="four-star">.</span> 26%
+                4 <FaStar /> <span className="four-star">.</span> 36%
               </li>
               <li>
-                3 <FaStar /> <span className="three-star">.</span> 12%
+                3 <FaStar /> <span className="three-star">.</span> 21%
               </li>
               <li>
                 2 <FaStar /> <span className="two-star">.</span> 05%

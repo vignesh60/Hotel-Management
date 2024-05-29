@@ -28,13 +28,17 @@ const Header = () => {
           <IoSearchOutline className="icon" />
         </div>
 
-        <div className="notification_plus_login">
+        {/* <div className="notification_plus_login">
           <div className="notification">
             <IoNotificationsOutline className="icon" />
           </div>
           <Link to="/profile">
             <img src={Profile} alt="Profile" className="profile" />
           </Link>
+        </div> */}
+        <div className="signin-signup">
+          <button className="btn">Sign In</button>
+          <button className="btn">Sign Up</button>
         </div>
       </div>
     </nav>
