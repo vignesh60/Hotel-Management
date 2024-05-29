@@ -6,12 +6,24 @@ import img4 from "../components/assets/No1-room/room4.avif";
 import img5 from "../components/assets/No1-room/room5.avif";
 import { FaStar } from "react-icons/fa";
 
+import a_icon1 from "../components/assets/a-icons (1).png";
+import a_icon2 from "../components/assets/a-icons (2).png";
+import a_icon3 from "../components/assets/a-icons (3).png";
+import a_icon4 from "../components/assets/a-icons (4).png";
+import a_icon5 from "../components/assets/a-icons (5).png";
+import a_icon6 from "../components/assets/a-icons (6).png";
+import a_icon7 from "../components/assets/a-icons (7).png";
+import a_icon8 from "../components/assets/a-icons (8).png";
+import a_icon9 from "../components/assets/a-icons (9).png";
+import a_icon10 from "../components/assets/a-icons (10).png";
+
+
 const RoomDetails = () => {
   const [img, setImg] = useState([img2, img3, img4, img5]);
 
-  useEffect(()=> {
-    window.scrollTo(0,0);
-  });
+  /* useEffect(() => {
+    window.scrollTo(0, 0);
+  }); */
 
   return (
     <div className="room-details-container">
@@ -41,7 +53,7 @@ const RoomDetails = () => {
           </div>
           <div className="description">
             <h2>Description</h2>
-            <p>
+            <p style={{ textIndent: "2rem", marginTop: "1rem" }}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
               exercitationem mollitia dolorum iusto labore ut maiores sequi ipsa
               quos tenetur adipisci repellendus dolore magnam hic ullam,
@@ -60,26 +72,58 @@ const RoomDetails = () => {
             </p>
             <div className="dates-field">
               <span>
-              <label htmlFor="checking">CKECK-IN</label>
-              <input type="date" id="date" />
+                <label htmlFor="checking">CKECK-IN</label>
+                <input type="date" id="date" />
               </span>
               <span>
-              <label htmlFor="checking">CKECK-OUT</label>
-              <input type="date" id="date" />
+                <label htmlFor="checking">CKECK-OUT</label>
+                <input type="date" id="date" />
               </span>
             </div>
             <ul>
-              <li><p>$79 x 7 nights</p> <p>$555</p></li>
-              <li><p>Weekly discount</p> <p style={{color:"red"}}>-$28</p></li>
-              <li><p>Cleaning fee</p> <p>$62</p></li>
-              <li><p>Service fee</p> <p>$83</p></li>
-              <li><p>Occupancy taxes and fees</p> <p>$29</p></li>
+              <li>
+                <p>$79 x 7 nights</p> <p>$555</p>
+              </li>
+              <li>
+                <p>Weekly discount</p> <p style={{ color: "red" }}>-$28</p>
+              </li>
+              <li>
+                <p>Cleaning fee</p> <p>$62</p>
+              </li>
+              <li>
+                <p>Service fee</p> <p>$83</p>
+              </li>
+              <li>
+                <p>Occupancy taxes and fees</p> <p>$29</p>
+              </li>
             </ul>
             <span className="total">
               <p>Total</p>
-              <p style={{color:"green",fontWeight: "500"}}>$701</p>
+              <p style={{ color: "green", fontWeight: "500" }}>$701</p>
             </span>
             <button className="btn">Continue to Book</button>
+          </div>
+        </div>
+      </div>
+
+      <div className="amenities-rationg-other-details">
+        <div className="amenities">
+          <h1>Amenities</h1>
+          <div className="row">
+            <ul className="col">
+              <li><img src={a_icon1} alt="icon" /> Garden view</li>
+              <li><img src={a_icon2} alt="icon" /> Wifi</li>
+              <li><img src={a_icon3} alt="icon" /> Free washer - in building</li>
+              <li><img src={a_icon4} alt="icon" /> Central air conditioning</li>
+              <li><img src={a_icon5} alt="icon" /> Refrigerator</li>
+            </ul>
+            <ul className="col">
+            <li><img src={a_icon6} alt="icon" /> Kitchen</li>
+              <li><img src={a_icon7} alt="icon" /> Pets allowed</li>
+              <li><img src={a_icon8} alt="icon" /> Dryer</li>
+              <li><img src={a_icon9} alt="icon" /> Security cameras on property</li>
+              <li><img src={a_icon10} alt="icon" /> Bicycles</li>
+            </ul>
           </div>
         </div>
       </div>
