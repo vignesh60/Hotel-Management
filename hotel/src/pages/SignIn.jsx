@@ -15,6 +15,8 @@ const SignIn = () => {
   const parts = location.pathname.split("/");
   const wordAfterLastSlash = parts[parts.length - 1];
 
+  const [error, setError] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // Retrieve form data from event.target
@@ -28,7 +30,7 @@ const SignIn = () => {
       navigate("/");
       window.location.reload();
     } else {
-      console.log("Invalid email or password:", formData.email);
+      setError("Invalid email & password");
       // Optionally, show error message to user
     }
   };
@@ -76,13 +78,17 @@ const SignIn = () => {
               <IoIosClose className="close-icon" onClick={() => closeForm()} />
             </h2>
             <form onSubmit={handleSubmit}>
+            {error && <p className="form_error-message">{error}</p>}
               <div className="input-box">
                 <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   id="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setError("");
+                  }}
                 />
               </div>
               <div className="input-box">
@@ -91,7 +97,10 @@ const SignIn = () => {
                   type="password"
                   id="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setError("");
+                  }}
                 />
               </div>
               <input type="submit" value="Sign In" className="btn" />

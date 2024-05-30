@@ -107,6 +107,7 @@ a {
     padding: 4.5px;
     border-radius: 25rem;
     right: 1px;
+    background: #029a5b;
   }
   
   .sidebar_logo {
@@ -126,7 +127,7 @@ a {
     gap: 0.5rem;
   }
 
-  .signin-signup .btn {
+  .log {
     font-size: 0.8rem;
     padding: 0.7rem 2rem;
   }
@@ -161,7 +162,7 @@ a {
     padding: 1rem;
     border-radius: 1rem;
     width: 400px;
-    transition: 0.8s ease-out;
+    transition: 0.3s ease-out;
     transform: translateY(20%);
     opacity: 0;
   }

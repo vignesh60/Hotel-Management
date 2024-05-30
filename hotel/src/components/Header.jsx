@@ -8,7 +8,7 @@ import { HiMiniBars3 } from "react-icons/hi2";
 import $ from "jquery";
 
 const Header = () => {
-  const [account,setAccount] = useState(false);
+  const [account, setAccount] = useState(false);
   const handleSideBar = () => {
     $(".main-container").css({ display: "block" });
     setTimeout(() => {
@@ -16,17 +16,23 @@ const Header = () => {
     }, 10);
   };
 
-  useEffect(()=> {
+  useEffect(() => {
     const storedLoginState = localStorage.getItem("isLogin");
-      if (storedLoginState === "true") { 
-        setAccount(true);
-      }
-  },[localStorage]);
+    if (storedLoginState === "true") {
+      setAccount(true);
+    }
+  }, [localStorage]);
 
   const handleLogout = () => {
-    localStorage.removeItem('isLogin');
-    setAccount(false);
-  }
+    const confirmation = window.confirm(
+      "Are you sure you want to Logout your Account?"
+    );
+
+    if (confirmation) {
+      localStorage.removeItem("isLogin");
+      setAccount(false);
+    }
+  };
 
   return (
     <nav>
@@ -42,24 +48,27 @@ const Header = () => {
           <IoSearchOutline className="icon" />
         </div>
 
-        {account ? (<div className="notification_plus_login">
-          <div className="notification">
-            <IoNotificationsOutline className="icon" />
+        {account ? (
+          <div className="notification_plus_login">
+            <div className="notification">
+              <IoNotificationsOutline className="icon" />
+            </div>
+            <Link to="/profile">
+              <img src={Profile} alt="Profile" className="profile" />
+            </Link>
+            <button className="btn log" onClick={() => handleLogout()}>
+              Logout
+            </button>
           </div>
-          <Link to="/profile">
-            <img src={Profile} alt="Profile" className="profile" />
-          </Link>
-          <button className="btn" onClick={() => handleLogout()}>Logout</button>
-        </div>
         ) : (
-        <div className="signin-signup">
-          <Link to="signin">
-            <button className="btn">Sign In</button>
-          </Link>
-          <Link to="signup">
-            <button className="btn">Sign Up</button>
-          </Link>
-        </div>
+          <div className="signin-signup">
+            <Link to="signin">
+              <button className="btn log">Sign In</button>
+            </Link>
+            <Link to="signup">
+              <button className="btn log">Sign Up</button>
+            </Link>
+          </div>
         )}
       </div>
     </nav>
