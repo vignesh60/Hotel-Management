@@ -59,6 +59,18 @@ const SignUp = () => {
     }
   }, [location]);
 
+  $(document).ready(function() {
+    $("input").focus(function() {
+      $(this).siblings("label").css({ top: "0"});
+    });
+  
+    $("input").blur(function() {
+      if (!$(this).val()) {
+        $(this).siblings("label").css({ top: "50%"});
+      }
+    });
+  });
+
   return (
     <>
       {overlay && (
@@ -70,41 +82,52 @@ const SignUp = () => {
             </h2>
             <form onSubmit={submitHandler}>
               {error && <p className="form_error-message">{error}</p>}
-              <input
-                type="text"
-                placeholder="Full Name"
-                name="name"
-                value={userData.name}
-                onChange={changeInputHandler}
-                autoFocus
-                required
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={userData.email}
-                onChange={changeInputHandler}
-                required
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={userData.password}
-                onChange={changeInputHandler}
-                required
-              />
-              <input
-                type="password"
-                placeholder="Confirm password"
-                name="password2"
-                value={userData.password2}
-                onChange={changeInputHandler}
-                required
-              />
+              <div className="input-box">
+                <label htmlFor="name">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={userData.name}
+                  onChange={changeInputHandler}
+                  autoFocus
+                  required
+                />
+              </div>
+              <div className="input-box">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={userData.email}
+                  onChange={changeInputHandler}
+                  required
+                />
+              </div>
+              <div className="input-box">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={userData.password}
+                  onChange={changeInputHandler}
+                  required
+                />
+              </div>
+              <div className="input-box">
+                <label htmlFor="confirm">Confirm password</label>
+                <input
+                  type="password"
+                  name="password2"
+                  value={userData.password2}
+                  onChange={changeInputHandler}
+                  required
+                />
+              </div>
               <small>
-                Already have an account? <Link to="/signin" style={{color: "blue"}}>Sign in</Link>
+                Already have an account?{" "}
+                <Link to="/signin" style={{ color: "blue" }}>
+                  Sign in
+                </Link>
               </small>
               <input type="submit" value="Sign Up" className="btn" />
             </form>

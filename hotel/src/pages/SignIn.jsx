@@ -25,7 +25,8 @@ const SignIn = () => {
 
     if (e === formData.email && pass === formData.password) {
       localStorage.setItem("isLogin", "true");
-      navigate('/');
+      navigate("/");
+      window.location.reload();
     } else {
       console.log("Invalid email or password:", formData.email);
       // Optionally, show error message to user
@@ -53,6 +54,18 @@ const SignIn = () => {
     }
   }, [location]);
 
+  $(document).ready(function () {
+    $("input").focus(function () {
+      $(this).siblings("label").css({ top: "0" });
+    });
+
+    $("input").blur(function () {
+      if (!$(this).val()) {
+        $(this).siblings("label").css({ top: "50%" });
+      }
+    });
+  });
+
   return (
     <>
       {overlay && (
@@ -63,23 +76,27 @@ const SignIn = () => {
               <IoIosClose className="close-icon" onClick={() => closeForm()} />
             </h2>
             <form onSubmit={handleSubmit}>
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className="input-box">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="input-box">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
               <input type="submit" value="Sign In" className="btn" />
-              <button className="btn">
-                <FcGoogle className="icon" /> Sign In with Google
+              <button className="btn" style={{marginTop:"-0.4rem"}}>
+                <FcGoogle className="icon"/> Sign In with Google
               </button>
             </form>
           </div>

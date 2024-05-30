@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import lux_room from "../components/assets/room1.png";
 import { IoBedOutline } from "react-icons/io5";
 import { HiOutlineUser } from "react-icons/hi2";
@@ -18,6 +18,8 @@ import room10 from "../components/assets/room (10).png";
 import swimming from "../components/assets/room (7).png";
 import { Link } from "react-router-dom";
 import SwiperRooms from "../SwiperRooms";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const [cards, setCards] = useState([
@@ -31,7 +33,17 @@ const Home = () => {
     room9,
     room8,
   ]);
+
   const [favorite, setFavorite] = useState(false);
+  
+  useEffect(() => {
+    const storedLoginState = localStorage.getItem("isLogin");
+    if (storedLoginState === "true") {
+      toast.success("User Login Successfully.");
+    }
+  }, []);
+
+
   return (
     <div className="home-container">
       <div className="banner-container">
@@ -72,7 +84,8 @@ const Home = () => {
                   <MdFavorite
                     className="favorite"
                     onClick={() => setFavorite((prev) => !prev)}
-                   style={{color: "red"}}/>
+                    style={{ color: "red" }}
+                  />
                 ) : (
                   <MdFavoriteBorder
                     className="favorite"
@@ -128,6 +141,11 @@ const Home = () => {
         </div>
       </div>
       <SwiperRooms />
+      <ToastContainer
+        toastClassName="custom-toast"
+        bodyClassName="custom-toast-content"
+        closeButtonClassName="custom-toast-close-button"
+      />
     </div>
   );
 };
