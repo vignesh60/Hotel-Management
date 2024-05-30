@@ -7,14 +7,16 @@ import { IoSettingsSharp } from "react-icons/io5";
 import { IoBed } from "react-icons/io5";
 import { RiDashboardFill } from "react-icons/ri";
 import { BiSolidOffer } from "react-icons/bi";
+import { PiSignInBold } from "react-icons/pi";
+import { LiaSignInAltSolid } from "react-icons/lia";
 
 const SideBar = () => {
-    const handleSideBar = () => {
-        setTimeout(() => {
-          $(".main-container").css({ display: "none" });
-        }, 200);
-        $(".sideBar-container").css({ transform: "translateX(-200%)" });
-      };
+  const handleSideBar = () => {
+    setTimeout(() => {
+      $(".main-container").css({ display: "none" });
+    }, 200);
+    $(".sideBar-container").css({ transform: "translateX(-200%)" });
+  };
   return (
     <div
       className="main-container"
@@ -38,25 +40,50 @@ const SideBar = () => {
                 to="dashboard"
                 style={{ textDecoration: "none", color: "#fff" }}
               >
-                <li><RiDashboardFill className="icons"/> Dashboard</li>
+                <li>
+                  <RiDashboardFill className="icons" /> Dashboard
+                </li>
               </Link>
               <Link
                 to="roomslist"
                 style={{ textDecoration: "none", color: "#fff" }}
               >
-                <li><IoBed className="icons"/> Rooms List</li>
+                <li>
+                  <IoBed className="icons" /> Rooms List
+                </li>
               </Link>
               <Link
                 to="offters"
                 style={{ textDecoration: "none", color: "#fff" }}
               >
-                <li><BiSolidOffer className="icons"/> Offers</li>
+                <li>
+                  <BiSolidOffer className="icons" /> Offers
+                </li>
               </Link>
               <Link
                 to="settings"
                 style={{ textDecoration: "none", color: "#fff" }}
               >
-                <li><IoSettingsSharp className="icons"/> Settings</li>
+                <li>
+                  <IoSettingsSharp className="icons" /> Settings
+                </li>
+              </Link>
+
+              <Link
+                to="signin"
+                style={{ textDecoration: "none", color: "#fff" }}
+              >
+                <li>
+                  <PiSignInBold className="icons" /> Sign In
+                </li>
+              </Link>
+              <Link
+                to="signup"
+                style={{ textDecoration: "none", color: "#fff" }}
+              >
+                <li>
+                  <LiaSignInAltSolid className="icons" /> Sign Up
+                </li>
               </Link>
             </ul>
           </div>

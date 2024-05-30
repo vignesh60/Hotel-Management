@@ -30,7 +30,7 @@ const RoomDetails = () => {
   const { id } = useParams();
   const Rooms = [
     {
-      room: [img1,img2,img3,img4,img4]
+      room: [img1,img2,img3,img4,img5]
     },
     {
       room: [r1,r2,r3,r4]
