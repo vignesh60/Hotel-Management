@@ -19,10 +19,12 @@ import r5 from "./components/assets/listofrooms/room (5).png";
 import r6 from "./components/assets/listofrooms/room (6).png";
 import r7 from "./components/assets/No2-room/room (1).png"
 import { Link } from "react-router-dom";
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
 const SwiperRooms = () => {
     const [images,setImages] = useState([r2,r7,r1,r3,r4,r5,r6]);
     const [count,setCount] = useState(3);
+    const [favorite, setFavorite] = useState(false);
 
     useEffect(() => {
         function handleResize() {
@@ -53,7 +55,21 @@ const SwiperRooms = () => {
           return (
             <SwiperSlide key={index} className="room-card">
               <div className="card" key={index}>
+              <span>
                 <img src={image} alt="loading" />
+                {favorite ? (
+                  <MdFavorite
+                    className="favorite"
+                    onClick={() => setFavorite((prev) => !prev)}
+                    style={{ color: "red" }}
+                  />
+                ) : (
+                  <MdFavoriteBorder
+                    className="favorite"
+                    onClick={() => setFavorite((prev) => !prev)}
+                  />
+                )}
+              </span>
                 <Link to={`roomdetails/${index}`}>
                 <div className="info">
                   <h2>Well Furnished Apartment</h2>

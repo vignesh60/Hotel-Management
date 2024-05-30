@@ -488,7 +488,7 @@ form input:focus {
   gap: 0.5rem;
 }
 
-.card .favorite {
+.favorite {
   font-size: 2rem;
   position: absolute;
   right: 1rem;
@@ -496,6 +496,7 @@ form input:focus {
   background: #ffffffad;
   padding: 0.3rem;
   border-radius: 5rem;
+  cursor: pointer;
 }
 
 
@@ -823,6 +824,51 @@ form input:focus {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ====================error-page========================= */
+
+.error-page{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.error-page .text {
+  font-size: 3rem;
+  position: absolute;
+  top: 0;
+}
+
+.error-page .btn {
+  position: absolute;
+  bottom: 1rem;
+}
+
+.error-page h1 {
+  font-size: 40vw;
+  background-clip: text;
+  color: transparent;
+  background-image: url('./components/assets/404-image.avif');
+}
 
 
 
