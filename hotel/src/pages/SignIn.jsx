@@ -25,7 +25,7 @@ const SignIn = () => {
 
     if (e === formData.email && pass === formData.password) {
       localStorage.setItem("isLogin", "true");
-      window.reload();
+      navigate('/');
     } else {
       console.log("Invalid email or password:", formData.email);
       // Optionally, show error message to user

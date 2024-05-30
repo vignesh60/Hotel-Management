@@ -142,13 +142,15 @@ a {
 
   .overlay {
     width: 100%;
-    height: 100vh;
+    height: 110vh;
     background: #00000090;
     position: absolute;
     position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1000;
+    margin-top: -1.5rem;
   }
 
   .overlay .form-container {
@@ -215,6 +217,15 @@ a {
     background: #8787878c;
   }
 
+  .form_error-message {
+    font-size: 0.8rem;
+    background: #f21331a7;
+    padding: 5px;
+    border-radius: 4px;
+    font-weight: 500;
+    color: var(--color-white);
+  }
+
 
 
 /* 
@@ -237,6 +248,9 @@ a {
 
   .banner-container h1 {
     font-size: 5vw;
+    background-clip: text !important;
+    color: transparent;
+    background: linear-gradient(to right, #00070b 0%,#6d09f9 60%);
   }
 
   .home-container .luxurious-room {
@@ -353,6 +367,16 @@ a {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .card .favorite {
+    font-size: 2rem;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    background: #ffffffad;
+    padding: 0.3rem;
+    border-radius: 5rem;
   }
 
 
@@ -619,7 +643,6 @@ a {
   box-shadow: 0 0 20px rgba(0,0,0,0.15);
   border: 1px solid transparent;
   transition: 0.4s;
-  cursor: pointer;
 }
 
 .recommented-rooms .room-card:hover {
@@ -629,6 +652,10 @@ a {
 
 .recommented-rooms .card {
   flex-direction: column !important;
+}
+
+.recommented-rooms .card .info {
+  cursor: pointer;
 }
 
 

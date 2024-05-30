@@ -4,6 +4,8 @@ import { IoBedOutline } from "react-icons/io5";
 import { HiOutlineUser } from "react-icons/hi2";
 import { TbArrowAutofitHeight } from "react-icons/tb";
 import { FaStar } from "react-icons/fa";
+import { MdFavoriteBorder } from "react-icons/md";
+import { MdFavorite } from "react-icons/md";
 import room1 from "../components/assets/room (1).png";
 import room2 from "../components/assets/room (2).png";
 import room3 from "../components/assets/room (3).png";
@@ -29,6 +31,7 @@ const Home = () => {
     room9,
     room8,
   ]);
+  const [favorite, setFavorite] = useState(false);
   return (
     <div className="home-container">
       <div className="banner-container">
@@ -62,35 +65,48 @@ const Home = () => {
         <h1>Available Rooms</h1>
         <div className="cards-container">
           {cards.map((card, index) => (
-            <Link to={`roomdetails/${index}`}>
             <div className="card" key={index}>
-              <img src={card} alt="loading" />
-              <div className="info">
-                <h2>Well Furnished Apartment</h2>
-                <span className="rating-field">
-                  <span className="rating">
-                    4.5 <FaStar />
+              <span style={{ position: "relative" }}>
+                <img src={card} alt="loading" />
+                {favorite ? (
+                  <MdFavorite
+                    className="favorite"
+                    onClick={() => setFavorite((prev) => !prev)}
+                   style={{color: "red"}}/>
+                ) : (
+                  <MdFavoriteBorder
+                    className="favorite"
+                    onClick={() => setFavorite((prev) => !prev)}
+                  />
+                )}
+              </span>
+              <Link to={`roomdetails/${index}`}>
+                <div className="info">
+                  <h2>Well Furnished Apartment</h2>
+                  <span className="rating-field">
+                    <span className="rating">
+                      4.5 <FaStar />
+                    </span>
+                    <p>(600+ reviews)</p>
                   </span>
-                  <p>(600+ reviews)</p>
-                </span>
-                <p>100 Smart Street, LA, India</p>
-                <p className="cost">
-                  <b>$2015</b> / 5 night
-                </p>
-                <ul className="flex">
-                  <li>
-                    <IoBedOutline className="icon" /> 4 Beds
-                  </li>
-                  <li>
-                    <HiOutlineUser className="icon" /> 8 Sleeps
-                  </li>
-                  <li>
-                    <TbArrowAutofitHeight className="icon" /> 1,340 Sq Ft
-                  </li>
-                </ul>
-              </div>
+                  <p>100 Smart Street, LA, India</p>
+                  <p className="cost">
+                    <b>$2015</b> / 5 night
+                  </p>
+                  <ul className="flex">
+                    <li>
+                      <IoBedOutline className="icon" /> 4 Beds
+                    </li>
+                    <li>
+                      <HiOutlineUser className="icon" /> 8 Sleeps
+                    </li>
+                    <li>
+                      <TbArrowAutofitHeight className="icon" /> 1,340 Sq Ft
+                    </li>
+                  </ul>
+                </div>
+              </Link>
             </div>
-            </Link>
           ))}
         </div>
       </div>
