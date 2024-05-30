@@ -17,9 +17,11 @@ import r3 from "./components/assets/listofrooms/room (3).png";
 import r4 from "./components/assets/listofrooms/room (4).png";
 import r5 from "./components/assets/listofrooms/room (5).png";
 import r6 from "./components/assets/listofrooms/room (6).png";
+import r7 from "./components/assets/No2-room/room (1).png"
+import { Link } from "react-router-dom";
 
 const SwiperRooms = () => {
-    const [images,setImages] = useState([r1,r2,r3,r4,r5,r6]);
+    const [images,setImages] = useState([r2,r7,r1,r3,r4,r5,r6]);
     const [count,setCount] = useState(3);
 
     useEffect(() => {
@@ -52,6 +54,7 @@ const SwiperRooms = () => {
             <SwiperSlide key={index} className="room-card">
               <div className="card" key={index}>
                 <img src={image} alt="loading" />
+                <Link to={`roomdetails/${index}`}>
                 <div className="info">
                   <h2>Well Furnished Apartment</h2>
                   <span className="rating-field">
@@ -75,7 +78,7 @@ const SwiperRooms = () => {
                       <TbArrowAutofitHeight className="icon" /> 1,340 Sq Ft
                     </li>
                   </ul>
-                </div>
+                </div></Link>
               </div>
             </SwiperSlide>
           );

@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import img1 from "../components/assets/No1-room/room1.avif";
 import img2 from "../components/assets/No1-room/room2.avif";
 import img3 from "../components/assets/No1-room/room3.avif";
 import img4 from "../components/assets/No1-room/room4.avif";
 import img5 from "../components/assets/No1-room/room5.avif";
+
+import r1 from "../components/assets/No2-room/room (1).png";
+import r2 from "../components/assets/No2-room/room (2).png";
+import r3 from "../components/assets/No2-room/room (3).png";
+import r4 from "../components/assets/No2-room/room (4).png";
 import { FaStar } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa6";
+import { FaArrowRight } from "react-icons/fa6";
 
 import a_icon1 from "../components/assets/a-icons (1).png";
 import a_icon2 from "../components/assets/a-icons (2).png";
@@ -17,9 +24,19 @@ import a_icon8 from "../components/assets/a-icons (8).png";
 import a_icon9 from "../components/assets/a-icons (9).png";
 import a_icon10 from "../components/assets/a-icons (10).png";
 import SwiperRooms from "../SwiperRooms";
+import { useParams } from "react-router-dom";
 
 const RoomDetails = () => {
-  const [img, setImg] = useState([img2, img3, img4, img5]);
+  const { id } = useParams();
+  const Rooms = [
+    {
+      room: [img1,img2,img3,img4,img4]
+    },
+    {
+      room: [r1,r2,r3,r4]
+    }
+  ]
+  const [active, setActive] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -29,10 +46,28 @@ const RoomDetails = () => {
     <div className="room-details-container">
       <div className="rooms-iamge-field">
         <div className="image-left-field">
-          <img src={img1} alt="image" />
+          <img src={Rooms[id].room[active]} alt="image" />
+          <div className="left-right-arrows">
+            <FaArrowLeft
+              className="arrow"
+              onClick={() =>
+                setActive((prevActive) =>
+                  prevActive === 0 ? Rooms[id].room.length - 1 : prevActive - 1
+                )
+              }
+            />
+            <FaArrowRight
+              className="arrow"
+              onClick={() =>
+                setActive((prevActive) =>
+                  prevActive === Rooms[id].room.length - 1 ? 0 : prevActive + 1
+                )
+              }
+            />
+          </div>
         </div>
         <div className="image-right-field">
-          {img.map((image, index) => (
+          {Rooms[id].room.slice(1).map((image, index) => (
             <img src={image} key={index} alt="image" />
           ))}
         </div>
@@ -146,7 +181,7 @@ const RoomDetails = () => {
             </ul>
           </div>
         </div>
-        <div className="rating-reviews" style={{marginTop: "3rem"}}>
+        <div className="rating-reviews" style={{ marginTop: "3rem" }}>
           <h1>Rating & Reviews</h1>
           <span className="rate">
             <span className="rating">
