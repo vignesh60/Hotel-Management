@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
 const SwiperRooms = () => {
-    const [images,setImages] = useState(Rooms[3].room);
+    const [images,setImages] = useState(Rooms[7].room);
     const [count,setCount] = useState(3);
     const [favorite, setFavorite] = useState(false);
 

@@ -13,12 +13,21 @@ import a_icon7 from "../components/assets/a-icons (7).png";
 import a_icon8 from "../components/assets/a-icons (8).png";
 import a_icon9 from "../components/assets/a-icons (9).png";
 import a_icon10 from "../components/assets/a-icons (10).png";
+import Rooms from "../components/rooms";
+import $ from 'jquery';
+
 import SwiperRooms from "../SwiperRooms";
 import { useParams } from "react-router-dom";
 
 const RoomDetails = () => {
   const { id } = useParams();
   const [active, setActive] = useState(0);
+
+  useEffect(()=> {
+    if(Rooms[id].room.length === 1){
+      $(".rooms-iamge-field").css({gridTemplateColumn: "1fr"});
+    }
+  },[id]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
