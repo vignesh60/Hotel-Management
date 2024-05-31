@@ -34,6 +34,16 @@ const Header = () => {
     }
   };
 
+  $(document).ready(function () {
+    $(".search_container input").focus(function () {
+      $(".search_container").css({borderColor: "#2591f7",boxShadow: "0 0 0px 3px #197cf54d"});
+
+      $(".search_container input").blur(function () {
+        $(".search_container").css({border: "2px solid #197cf593",boxShadow: "0 0 0 0"});
+      });
+    });
+  });
+
   return (
     <nav>
       <div className="container nav_container">
