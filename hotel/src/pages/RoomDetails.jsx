@@ -1,14 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import img1 from "../components/assets/No1-room/room1.avif";
-import img2 from "../components/assets/No1-room/room2.avif";
-import img3 from "../components/assets/No1-room/room3.avif";
-import img4 from "../components/assets/No1-room/room4.avif";
-import img5 from "../components/assets/No1-room/room5.avif";
-
-import r1 from "../components/assets/No2-room/room (1).png";
-import r2 from "../components/assets/No2-room/room (2).png";
-import r3 from "../components/assets/No2-room/room (3).png";
-import r4 from "../components/assets/No2-room/room (4).png";
 import { FaStar } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa6";
@@ -28,14 +18,6 @@ import { useParams } from "react-router-dom";
 
 const RoomDetails = () => {
   const { id } = useParams();
-  const Rooms = [
-    {
-      room: [img1,img2,img3,img4,img5]
-    },
-    {
-      room: [r1,r2,r3,r4]
-    }
-  ]
   const [active, setActive] = useState(0);
 
   useEffect(() => {

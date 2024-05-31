@@ -10,19 +10,12 @@ import { FaStar } from "react-icons/fa";
 import { IoBedOutline } from "react-icons/io5";
 import { HiOutlineUser } from "react-icons/hi2";
 import { TbArrowAutofitHeight } from "react-icons/tb";
-
-import r1 from "./components/assets/listofrooms/room (1).png";
-import r2 from "./components/assets/listofrooms/room (2).png";
-import r3 from "./components/assets/listofrooms/room (3).png";
-import r4 from "./components/assets/listofrooms/room (4).png";
-import r5 from "./components/assets/listofrooms/room (5).png";
-import r6 from "./components/assets/listofrooms/room (6).png";
-import r7 from "./components/assets/No2-room/room (1).png"
+import Rooms from "./components/rooms";
 import { Link } from "react-router-dom";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
 const SwiperRooms = () => {
-    const [images,setImages] = useState([r2,r7,r1,r3,r4,r5,r6]);
+    const [images,setImages] = useState(Rooms[3].room);
     const [count,setCount] = useState(3);
     const [favorite, setFavorite] = useState(false);
 

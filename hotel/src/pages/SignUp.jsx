@@ -89,7 +89,6 @@ const SignUp = () => {
                   name="name"
                   value={userData.name}
                   onChange={changeInputHandler}
-                  autoFocus
                   required
                 />
               </div>

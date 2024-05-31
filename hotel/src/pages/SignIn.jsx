@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import $ from "jquery";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 
 const SignIn = () => {
@@ -103,6 +103,12 @@ const SignIn = () => {
                   }}
                 />
               </div>
+              <small>
+                If you don't have an account?{" "}
+                <Link to="/signup" style={{ color: "blue" }}>
+                  Sign up
+                </Link>
+              </small>
               <input type="submit" value="Sign In" className="btn" />
               <button className="btn" style={{marginTop:"-0.4rem"}}>
                 <FcGoogle className="icon"/> Sign In with Google

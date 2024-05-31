@@ -327,12 +327,12 @@ form input:focus {
   align-items: center;
   gap: 1rem;
   justify-content: center;
-  background: #ddd;
+  background: #dddddd9e;
   color: var(--color-black);
 }
 
 .form-container button:hover {
-  background: #8787878c;
+  background: #87878769;
 }
 
 .form_error-message {
@@ -359,7 +359,7 @@ form input:focus {
   transform: translateY(-50%);
   font-size: 0.8rem;
   pointer-events: none;
-  border-radius: 5px;
+  border-radius: 3px;
   transition: 0.4s;
 }
 
