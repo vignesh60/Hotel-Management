@@ -3,6 +3,7 @@ import { IoIosClose } from "react-icons/io";
 import $ from "jquery";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import { PiWarningOctagonBold } from "react-icons/pi";
 
 const SignIn = () => {
   var e = "vigneshg.22cse@kongu.edu";
@@ -78,7 +79,7 @@ const SignIn = () => {
               <IoIosClose className="close-icon" onClick={() => closeForm()} />
             </h2>
             <form onSubmit={handleSubmit}>
-            {error && <p className="form_error-message">{error}</p>}
+            {error && <p className="form_error-message">{error} <PiWarningOctagonBold style={{fontSize: "1rem"}}/></p>}
               <div className="input-box">
                 <label htmlFor="email">Email</label>
                 <input

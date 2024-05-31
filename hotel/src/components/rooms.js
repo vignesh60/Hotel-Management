@@ -25,11 +25,11 @@ const Rooms = [
   {
     room: [r1, r2, r3, r4, r5],
   },
-  { room: [room1] },
-  { room: [room3] },
-  { room: [room4] },
-  { room: [room5] },
-  { room: [room6] },
+  { room: [room1,room1] },
+  { room: [room3,room3] },
+  { room: [room4,room4] },
+  { room: [room5,room5] },
+  { room: [room6,room6] },
   {
     room: [room2, room7, room1, room3, room4, room5, room6],
   },

@@ -23,12 +23,6 @@ const RoomDetails = () => {
   const { id } = useParams();
   const [active, setActive] = useState(0);
 
-  useEffect(()=> {
-    if(Rooms[id].room.length === 1){
-      $(".rooms-iamge-field").css({gridTemplateColumn: "1fr"});
-    }
-  },[id]);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   });

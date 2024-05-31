@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import $ from "jquery";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { PiWarningOctagonBold } from "react-icons/pi";
 
 const SignUp = () => {
   const [overlay, setOverlay] = useState(false);
@@ -59,14 +60,14 @@ const SignUp = () => {
     }
   }, [location]);
 
-  $(document).ready(function() {
-    $("input").focus(function() {
-      $(this).siblings("label").css({ top: "0"});
+  $(document).ready(function () {
+    $("input").focus(function () {
+      $(this).siblings("label").css({ top: "0" });
     });
-  
-    $("input").blur(function() {
+
+    $("input").blur(function () {
       if (!$(this).val()) {
-        $(this).siblings("label").css({ top: "50%"});
+        $(this).siblings("label").css({ top: "50%" });
       }
     });
   });
@@ -81,7 +82,11 @@ const SignUp = () => {
               <IoIosClose className="close-icon" onClick={() => closeForm()} />
             </h2>
             <form onSubmit={submitHandler}>
-              {error && <p className="form_error-message">{error}</p>}
+              {error && (
+                <p className="form_error-message">
+                  {error} <PiWarningOctagonBold style={{ fontSize: "1rem" }} />
+                </p>
+              )}
               <div className="input-box">
                 <label htmlFor="name">Name</label>
                 <input
