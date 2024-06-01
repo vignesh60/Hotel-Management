@@ -3,6 +3,7 @@ import { IoIosClose } from "react-icons/io";
 import $ from "jquery";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { PiWarningOctagonBold } from "react-icons/pi";
+import axios from "axios";
 
 const SignUp = () => {
   const [overlay, setOverlay] = useState(false);
@@ -11,31 +12,38 @@ const SignUp = () => {
   const parts = location.pathname.split("/");
   const wordAfterLastSlash = parts[parts.length - 1];
 
-  const [userData, setUserData] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    password2: "",
+    confirmPassword: "",
   });
 
   const [error, setError] = useState("");
 
-  const changeInputHandler = (e) => {
-    setUserData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
     setError("");
   };
 
-  const submitHandler = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (userData.password !== userData.password2) {
+    if (formData.password !== formData.confirmPassword) {
       setError("Password mismatch. Please check your password.");
-    } else {
-      setError("");
-      navigate("/login");
+      return;
+    }
+
+    try {
+      const res = await axios.post("http://localhost:3000/register", {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
+      console.log(res.data);
+      alert("Registration successful");
+    } catch (error) {
+      console.error(error.response.data);
+      alert("Registration failed");
     }
   };
 
@@ -81,7 +89,7 @@ const SignUp = () => {
               Sign Up{" "}
               <IoIosClose className="close-icon" onClick={() => closeForm()} />
             </h2>
-            <form onSubmit={submitHandler}>
+            <form onSubmit={handleSubmit}>
               {error && (
                 <p className="form_error-message">
                   {error} <PiWarningOctagonBold style={{ fontSize: "1rem" }} />
@@ -92,8 +100,8 @@ const SignUp = () => {
                 <input
                   type="text"
                   name="name"
-                  value={userData.name}
-                  onChange={changeInputHandler}
+                  value={formData.name}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -102,8 +110,8 @@ const SignUp = () => {
                 <input
                   type="email"
                   name="email"
-                  value={userData.email}
-                  onChange={changeInputHandler}
+                  value={formData.email}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -112,8 +120,8 @@ const SignUp = () => {
                 <input
                   type="password"
                   name="password"
-                  value={userData.password}
-                  onChange={changeInputHandler}
+                  value={formData.password}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -122,8 +130,8 @@ const SignUp = () => {
                 <input
                   type="password"
                   name="password2"
-                  value={userData.password2}
-                  onChange={changeInputHandler}
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
                   required
                 />
               </div>

@@ -4,36 +4,41 @@ import $ from "jquery";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { PiWarningOctagonBold } from "react-icons/pi";
+import axios from "axios";
 
 const SignIn = () => {
-  var e = "vigneshg.22cse@kongu.edu";
-  var pass = "1234";
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [overlay, setOverlay] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const parts = location.pathname.split("/");
   const wordAfterLastSlash = parts[parts.length - 1];
 
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
   const [error, setError] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Retrieve form data from event.target
-    const formData = {
-      email: event.target.email.value,
-      password: event.target.password.value,
-    };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    if (e === formData.email && pass === formData.password) {
-      localStorage.setItem("isLogin", "true");
-      navigate("/");
-      window.location.reload();
-    } else {
-      setError("Invalid email & password");
-      // Optionally, show error message to user
-    }
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      try {
+          const res = await axios.post('http://localhost:3000/login', {
+              email: formData.email,
+              password: formData.password
+          });
+          console.log(res.data);
+          localStorage.setItem('isLogin','true');
+          alert('Login successful');
+      } catch (error) {
+          console.error(error.response.data);
+          alert('Login failed');
+      }
   };
 
   function closeForm() {
@@ -79,17 +84,18 @@ const SignIn = () => {
               <IoIosClose className="close-icon" onClick={() => closeForm()} />
             </h2>
             <form onSubmit={handleSubmit}>
-            {error && <p className="form_error-message">{error} <PiWarningOctagonBold style={{fontSize: "1rem"}}/></p>}
+              {error && (
+                <p className="form_error-message">
+                  {error} <PiWarningOctagonBold style={{ fontSize: "1rem" }} />
+                </p>
+              )}
               <div className="input-box">
                 <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   id="email"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    setError("");
-                  }}
+                  value={formData.email}
+                  onChange={handleChange}
                 />
               </div>
               <div className="input-box">
@@ -97,11 +103,8 @@ const SignIn = () => {
                 <input
                   type="password"
                   id="password"
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    setError("");
-                  }}
+                  value={formData.password}
+                  onChange={handleChange}
                 />
               </div>
               <small>
@@ -111,8 +114,8 @@ const SignIn = () => {
                 </Link>
               </small>
               <input type="submit" value="Sign In" className="btn" />
-              <button className="btn" style={{marginTop:"-0.4rem"}}>
-                <FcGoogle className="icon"/> Sign In with Google
+              <button className="btn" style={{ marginTop: "-0.4rem" }}>
+                <FcGoogle className="icon" /> Sign In with Google
               </button>
             </form>
           </div>
