@@ -22,22 +22,23 @@ const SignIn = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError("");
   };
 
     const handleSubmit = async (e) => {
       e.preventDefault();
 
       try {
-          const res = await axios.post('http://localhost:3000/login', {
+          const res = await axios.post('http://localhost:5000/login', {
               email: formData.email,
               password: formData.password
           });
-          console.log(res.data);
           localStorage.setItem('isLogin','true');
           alert('Login successful');
+          window.location.reload();
       } catch (error) {
-          console.error(error.response.data);
-          alert('Login failed');
+          //console.error(error.response.data);
+          setError("User not found");
       }
   };
 
@@ -93,7 +94,7 @@ const SignIn = () => {
                 <label htmlFor="email">Email</label>
                 <input
                   type="email"
-                  id="email"
+                  name="email"
                   value={formData.email}
                   onChange={handleChange}
                 />
@@ -102,7 +103,7 @@ const SignIn = () => {
                 <label htmlFor="password">Password</label>
                 <input
                   type="password"
-                  id="password"
+                  name="password"
                   value={formData.password}
                   onChange={handleChange}
                 />

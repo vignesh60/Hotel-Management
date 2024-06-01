@@ -34,7 +34,7 @@ const SignUp = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:3000/register", {
+      const res = await axios.post("http://localhost:5000/register", {
         name: formData.name,
         email: formData.email,
         password: formData.password,
@@ -42,8 +42,8 @@ const SignUp = () => {
       console.log(res.data);
       alert("Registration successful");
     } catch (error) {
-      console.error(error.response.data);
-      alert("Registration failed");
+      //console.error(error.response.data);
+      setError("This account is already Registred");
     }
   };
 
@@ -129,7 +129,7 @@ const SignUp = () => {
                 <label htmlFor="confirm">Confirm password</label>
                 <input
                   type="password"
-                  name="password2"
+                  name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   required
