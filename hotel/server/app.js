@@ -134,7 +134,9 @@ app.post("/login", (req, res) => {
 /* ------------------------adding-rooms----------------------- */
 
 const storage = multer.diskStorage({
-  destination: "./uploads/",
+  destination: (req, file, cb) =>{
+    cb(null, './uplods/')
+  },
   filename: function (req, file, cb) {
     cb(
       null,
@@ -231,6 +233,33 @@ app.post("/addRoom", (req, res) => {
 
 // Serve uploaded images statically
 app.use("/uploads", express.static("uploads"));
+
+
+
+
+
+
+
+
+
+
+
+
+app.get("/getRoom/:roomId", (req, res) => {
+  const roomId = req.params.roomId;
+  roomdb.query("SELECT * FROM rooms WHERE id = ?", roomId, (err, result) => {
+    if (err) {
+      console.error("Error fetching room details:", err);
+      res.status(500).send("Error fetching room details");
+      return;
+    }
+    if (result.length > 0) {
+      res.json(result[0]); // Return the first row (assuming roomId is unique)
+    } else {
+      res.status(404).send("Room not found");
+    }
+  });
+});
 
 
 

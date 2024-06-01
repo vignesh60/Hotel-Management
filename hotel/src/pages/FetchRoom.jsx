@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+import img from "../uploads/images-1717269581793-211272622.png";
+
+
 const FetchRoom = () => {
-    const roomId = 1;
+    const roomId = 3;
     const [room, setRoom] = useState(null);
 
     useEffect(() => {
@@ -23,7 +26,7 @@ const FetchRoom = () => {
     }
 
     return (
-        <div>
+        <div style={{paddingTop: "4rem"}}>
             <h2>{room.title}</h2>
             <p>{room.location}</p>
             <p>{room.description}</p>
