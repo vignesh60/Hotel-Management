@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 const bcrypt = require('bcryptjs');
 const cors = require('cors');
+const multer = require('multer');
+const path = require('path');
 
 const app = express();
 const port = 5000;
@@ -18,7 +20,24 @@ const db = mysql.createConnection({
     database: 'mydatabase'
 })
 
+const roomdb = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '1234',
+    database: 'hotel_rooms'
+})
+
+
 db.connect((err) => {
+  if (err) {
+    console.error("Error connecting to MySQL database");
+    throw err;
+  }
+  console.log("Connected to MySQL database");
+});
+
+
+roomdb.connect((err) => {
   if (err) {
     console.error("Error connecting to MySQL database");
     throw err;
@@ -104,6 +123,116 @@ app.post("/login", (req, res) => {
     }
   });
 });
+
+
+
+
+
+
+
+
+/* ------------------------adding-rooms----------------------- */
+
+const storage = multer.diskStorage({
+  destination: "./uploads/",
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+const upload = multer({
+    storage: storage,
+}).array("images", 10);
+
+
+app.post("/addRoom", (req, res) => {
+  upload(req, res, function (err) {
+    if (err) {
+      console.error("Error uploading images:", err);
+      return res.status(500).send("Error uploading images");
+    }
+
+    const room = req.body;
+    const {
+      title,
+      location,
+      description,
+      price,
+      rating,
+      reviews,
+      beds,
+      sleeps,
+      sq_ft,
+      garden_view,
+      wifi,
+      washer,
+      air_conditioning,
+      refrigerator,
+      kitchen,
+      pets_allowed,
+      dryer,
+      security_cameras,
+      bicycles,
+    } = room;
+
+    // Extract uploaded image URLs
+    const images = req.files.map((file) => `/uploads/${file.filename}`);
+
+    // Convert boolean fields to integers
+    const gardenViewInt = garden_view ? 1 : 0;
+    const wifiInt = wifi ? 1 : 0;
+    const washerInt = washer ? 1 : 0;
+    const airConditioningInt = air_conditioning ? 1 : 0;
+    const refrigeratorInt = refrigerator ? 1 : 0;
+    const kitchenInt = kitchen ? 1 : 0;
+    const petsAllowedInt = pets_allowed ? 1 : 0;
+    const dryerInt = dryer ? 1 : 0;
+    const securityCamerasInt = security_cameras ? 1 : 0;
+    const bicyclesInt = bicycles ? 1 : 0;
+
+    // Prepare room object to insert into database
+    const roomData = {
+      title,
+      location,
+      description,
+      price,
+      rating,
+      reviews,
+      beds,
+      sleeps,
+      sq_ft,
+      garden_view: gardenViewInt,
+      wifi: wifiInt,
+      washer: washerInt,
+      air_conditioning: airConditioningInt,
+      refrigerator: refrigeratorInt,
+      kitchen: kitchenInt,
+      pets_allowed: petsAllowedInt,
+      dryer: dryerInt,
+      security_cameras: securityCamerasInt,
+      bicycles: bicyclesInt,
+      images: JSON.stringify(images), // Store images as JSON array
+    };
+
+    roomdb.query("INSERT INTO rooms SET ?", roomData, (err, result) => {
+      if (err) {
+        console.error("Error adding room to database:", err);
+        res.status(500).send("Error adding room");
+        return;
+      }
+      console.log("Room added to database with ID:", result.insertId);
+      res.status(201).send("Room added successfully");
+    });
+  });
+});
+
+// Serve uploaded images statically
+app.use("/uploads", express.static("uploads"));
+
+
 
 
 app.listen(port, () => {
