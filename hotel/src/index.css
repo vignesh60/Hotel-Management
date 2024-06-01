@@ -370,6 +370,15 @@ form input:focus {
 
 
 
+
+
+
+
+
+
+
+
+
 /* 
   =============================home======================= */
 
@@ -858,6 +867,41 @@ form input:focus {
 
 .recommented-rooms .card .info {
   cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================add-room========================== */
+
+.add-room-container {
+    padding: 4rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.add-room-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 

@@ -7,6 +7,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
 import RoomDetails from "./pages/RoomDetails";
 import AddRoom from "./pages/AddRoom";
+import FetchRoom from "./pages/FetchRoom";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
     {path: "/signin", element:<Home />},
     {path: "/signup", element:<Home />},
     {path: "/addroom", element:<AddRoom />},
+    {path: "/fetchroom", element:<FetchRoom />},
   ],
   },
 ]);

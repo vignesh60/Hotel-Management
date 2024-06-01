@@ -95,9 +95,37 @@ const AddRoom = () => {
                 <label>
                     <input type="checkbox" name="garden_view" checked={formData.garden_view} onChange={handleChange} /> Garden view
                 </label>
-                {/* Add more checkboxes for other amenities */}
+                <label>
+                    <input type="checkbox" name="wifi" checked={formData.wifi} onChange={handleChange} /> Wifi
+                </label>
+                <label>
+                    <input type="checkbox" name="washer" checked={formData.washer} onChange={handleChange} /> Washer
+                </label>
+                <label>
+                    <input type="checkbox" name="air_conditioning" checked={formData.air_conditioning} onChange={handleChange} /> Air Conditioning
+                </label>
+                <label>
+                    <input type="checkbox" name="refrigerator" checked={formData.refrigerator} onChange={handleChange} /> Refrigerator
+                </label>
+                <label>
+                    <input type="checkbox" name="kitchen" checked={formData.kitchen} onChange={handleChange} /> Kitchen
+                </label>
+                <label>
+                    <input type="checkbox" name="pets_allowed" checked={formData.pets_allowed} onChange={handleChange} /> Pets Allowed
+                </label>
+                <label>
+                    <input type="checkbox" name="dryer" checked={formData.dryer} onChange={handleChange} /> Dryer
+                </label>
+                <label>
+                    <input type="checkbox" name="security_cameras" checked={formData.security_cameras} onChange={handleChange} /> Security_cameras
+                </label>
+                <label>
+                    <input type="checkbox" name="bicycles" checked={formData.bicycles} onChange={handleChange} /> Bicycles
+                </label>
+                
+
                 <input type="file" name="images" multiple onChange={handleImageChange} />
-                <button type="submit">Add Room</button>
+                <button type="submit" className='btn'>Add Room</button>
             </form>
     </div>
   )
