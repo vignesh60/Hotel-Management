@@ -62,7 +62,7 @@ a {
 }
 
 .search_container {
-  border: 1px solid #197cf5;
+  border: 2px solid #197cf593;
   display: flex;
   align-items: center;
   justify-content: space-between;
