@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa6";
+import axios from "axios";
 
 import a_icon1 from "../components/assets/a-icons (1).png";
 import a_icon2 from "../components/assets/a-icons (2).png";
@@ -14,32 +15,74 @@ import a_icon8 from "../components/assets/a-icons (8).png";
 import a_icon9 from "../components/assets/a-icons (9).png";
 import a_icon10 from "../components/assets/a-icons (10).png";
 import Rooms from "../components/rooms";
-import $ from 'jquery';
+import $ from "jquery";
 
 import SwiperRooms from "../SwiperRooms";
 import { useParams } from "react-router-dom";
 
 const RoomDetails = () => {
   const { id } = useParams();
-  const [active, setActive] = useState(0);
+
+  const roomId = 4;
+  const [room, setRoom] = useState(null);
+  const [active,setActive] = useState(0);
+  const [matchingIndexes, setMatchingIndexes] = useState([]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  });
+    const fetchRoom = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/getRoom/${roomId}`);
+        setRoom(res.data);
+      } catch (error) {
+        console.error("Error fetching room details:", error);
+      }
+    };
 
-  
+    fetchRoom();
+  }, [roomId]);
+
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/images");
+        setImages(response.data); // Assuming response.data is an array of image file names
+      } catch (error) {
+        console.error("Error fetching images:", error);
+      }
+    };
+
+    fetchImages();
+
+    const matchingIndexes = images.map((image, index) => {
+      const [title, filename] = image.split('+');
+      return title === room.title ? index : null; // Return index if title matches, otherwise null
+    }).filter(index => index !== null); 
+    
+    setMatchingIndexes(matchingIndexes)
+    
+  }, []);
+
+  if (!room) {
+    return <div style={{ paddingTop: "5rem" }}>Loading...</div>;
+  }
+
+  /* useEffect(() => {
+    window.scrollTo(0, 0);
+  }); */
 
   return (
     <div className="room-details-container">
       <div className="rooms-iamge-field">
         <div className="image-left-field">
-          <img src={Rooms[id].room[active]} alt="image" />
+          <img src={`http://localhost:5000/uploads/${images[matchingIndexes[active]]}`} alt="image" />
           <div className="left-right-arrows">
             <FaArrowLeft
               className="arrow"
               onClick={() =>
                 setActive((prevActive) =>
-                  prevActive === 0 ? Rooms[id].room.length - 1 : prevActive - 1
+                  prevActive === 0 ? matchingIndexes.length - 1 : prevActive - 1
                 )
               }
             />
@@ -47,50 +90,53 @@ const RoomDetails = () => {
               className="arrow"
               onClick={() =>
                 setActive((prevActive) =>
-                  prevActive === Rooms[id].room.length - 1 ? 0 : prevActive + 1
+                  prevActive === matchingIndexes.length - 1 ? 0 : prevActive + 1
                 )
               }
             />
           </div>
         </div>
         <div className="image-right-field">
-          {Rooms[id].room.slice(1).map((image, index) => (
-            <img src={image} key={index} alt="image" />
-          ))}
+          {images.map((image, index) => {
+            const [title, filename] = image.split("+"); 
+            return (
+              <>
+                {title === room.title && (
+                  <img
+                    src={`http://localhost:5000/uploads/${image}` }
+                    alt={`Image ${index}`}
+                   key={index}/>
+                )}
+              </>
+            );
+          })}
         </div>
       </div>
       <div className="about-room-container">
         <div className="about-room">
           <div className="name flex">
             <span>
-              <h1>Mannat Hotel Devi Place inn</h1>
-              <p>Near Chennai Airport, Tamil Nadu</p>
+              <h1>{room.title}</h1>
+              <p>{room.location}</p>
             </span>
             <span className="rate">
               <span className="rating">
-                4.5 <FaStar />
+                {room.rating} <FaStar />
               </span>
-              <p>(600+ reviews)</p>
+              <p>({room.reviews} reviews)</p>
             </span>
           </div>
           <div className="description">
             <h2>Description</h2>
             <p style={{ textIndent: "2rem", marginTop: "1rem" }}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
-              exercitationem mollitia dolorum iusto labore ut maiores sequi ipsa
-              quos tenetur adipisci repellendus dolore magnam hic ullam,
-              voluptatem provident nostrum saepe. Sit soluta harum eaque! Modi,
-              neque, dolore quasi aspernatur doloribus laudantium eligendi nobis
-              voluptas possimus quisquam error? Soluta deserunt doloribus,
-              expedita ipsam perspiciatis a, sapiente repudiandae minima
-              cupiditate nesciunt sequi? !
+              {room.description}
             </p>
           </div>
         </div>
         <div className="cost-and-book">
           <div className="booking-card">
             <p>
-              <b>$65 </b>/ night
+              <b>${room.price} </b>/ night
             </p>
             <div className="dates-field">
               <span>
@@ -172,9 +218,9 @@ const RoomDetails = () => {
           <h1>Rating & Reviews</h1>
           <span className="rate">
             <span className="rating">
-              4.5 <FaStar />
+              {room.rating} <FaStar />
             </span>
-            <p>(600+ reviews)</p>
+            <p>({room.reviews} reviews)</p>
           </span>
           <div className="grids">
             <ul>
