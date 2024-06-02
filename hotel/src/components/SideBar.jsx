@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import $ from "jquery";
 import { Link } from "react-router-dom";
@@ -17,6 +17,13 @@ const SideBar = () => {
     }, 200);
     $(".sideBar-container").css({ transform: "translateX(-200%)" });
   };
+  const [account, setAccount] = useState(false);
+  useEffect(() => {
+    const storedLoginState = localStorage.getItem("isLogin");
+    if (storedLoginState === "true") {
+      setAccount(true);
+    }
+  }, [localStorage]);
   return (
     <div
       className="main-container"
@@ -44,14 +51,16 @@ const SideBar = () => {
                   <RiDashboardFill className="icons" /> Dashboard
                 </li>
               </Link>
-              <Link
-                to="addroom"
-                style={{ textDecoration: "none", color: "#fff" }}
-              >
-                <li>
-                  <IoBed className="icons" /> Add Room
-                </li>
-              </Link>
+              {account && (
+                <Link
+                  to="addroom"
+                  style={{ textDecoration: "none", color: "#fff" }}
+                >
+                  <li>
+                    <IoBed className="icons" /> Add Room
+                  </li>
+                </Link>
+              )}
               <Link
                 to="roomslist"
                 style={{ textDecoration: "none", color: "#fff" }}
@@ -76,23 +85,26 @@ const SideBar = () => {
                   <IoSettingsSharp className="icons" /> Settings
                 </li>
               </Link>
-
-              <Link
-                to="signin"
-                style={{ textDecoration: "none", color: "#fff" }}
-              >
-                <li>
-                  <PiSignInBold className="icons" /> Sign In
-                </li>
-              </Link>
-              <Link
-                to="signup"
-                style={{ textDecoration: "none", color: "#fff" }}
-              >
-                <li>
-                  <LiaSignInAltSolid className="icons" /> Sign Up
-                </li>
-              </Link>
+              {!account && (
+                <>
+                  <Link
+                    to="signin"
+                    style={{ textDecoration: "none", color: "#fff" }}
+                  >
+                    <li>
+                      <PiSignInBold className="icons" /> Sign In
+                    </li>
+                  </Link>
+                  <Link
+                    to="signup"
+                    style={{ textDecoration: "none", color: "#fff" }}
+                  >
+                    <li>
+                      <LiaSignInAltSolid className="icons" /> Sign Up
+                    </li>
+                  </Link>
+                </>
+              )}
             </ul>
           </div>
         </div>

@@ -14,8 +14,7 @@ import a_icon7 from "../components/assets/a-icons (7).png";
 import a_icon8 from "../components/assets/a-icons (8).png";
 import a_icon9 from "../components/assets/a-icons (9).png";
 import a_icon10 from "../components/assets/a-icons (10).png";
-import Rooms from "../components/rooms";
-import $ from "jquery";
+
 
 import SwiperRooms from "../SwiperRooms";
 import { useParams } from "react-router-dom";
@@ -68,8 +67,16 @@ const RoomDetails = () => {
     setMatchingIndexes(matchingIndexes);
   }, [images]);
 
-  if (!room) {
-    return <div style={{ paddingTop: "5rem" }}>Loading...</div>;
+  const LoadingSpinner = () => (
+    <div className="spinner"></div>
+  );
+
+  if (!room ||!images) {
+    return (
+      <div style={{ paddingTop: "5rem", textAlign: "center" }} className="spinner-field">
+        <LoadingSpinner />
+      </div>
+    );
   }
 
   /* useEffect(() => {
