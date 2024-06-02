@@ -18,7 +18,6 @@ const Layout = () => {
   }, [localStorage]);
 
   if(!isAuthRoute){
-    $(".home-container").css({paddingTop: "5.5rem"});
     $(".main-container").css({marginTop: "0"});
   }
 

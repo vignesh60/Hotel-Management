@@ -57,6 +57,8 @@ const RoomDetails = () => {
   }, []);
 
   useEffect(() => {
+    if (!room || !images) return;
+    
     const matchingIndexes = images
       .map((image, index) => {
         const [title, filename] = image.split("+");
@@ -65,7 +67,7 @@ const RoomDetails = () => {
       .filter((index) => index !== null);
 
     setMatchingIndexes(matchingIndexes);
-  }, [images]);
+  }, [room,images]);
 
   const LoadingSpinner = () => (
     <div className="spinner"></div>

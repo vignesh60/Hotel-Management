@@ -21,6 +21,7 @@ import SwiperRooms from "../SwiperRooms";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import $ from 'jquery';
 
 const Home = () => {
   const [cards, setCards] = useState([
@@ -43,6 +44,7 @@ const Home = () => {
       toast.success("User Login Successfully.");
     }
   }, []);
+  
 
   const [room, setRoom] = useState(null);
   const [images, setImages] = useState([]);
@@ -106,7 +108,7 @@ const Home = () => {
   }
 
   return (
-    <div className="home-container">
+    <div className="home-container" style={localStorage.getItem('isLogin') === 'true' ? {paddingTop: "5.5rem"} : {}}>
       <div className="banner-container">
         <h1>
           Find an apartment for

@@ -995,7 +995,7 @@ form input:focus,textarea:focus {
   font-weight: 500;
 }
 
-.add-room-container .col label input{
+.add-room-container .row2 .col label input{
   width: 1rem;
   cursor: pointer;
 }

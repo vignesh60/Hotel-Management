@@ -191,7 +191,7 @@ const AddRoom = () => {
             </label>
           </div>
         </div>
-        <div className="row">
+        <div className="row row2">
           <div className="col">
             <label>
               <input
