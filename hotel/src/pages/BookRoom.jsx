@@ -4,46 +4,54 @@ const BookRoom = ({ price }) => {
     const [checkInDate, setCheckInDate] = useState('');
     const [checkOutDate, setCheckOutDate] = useState('');
   
-    // Constants for pricing
-    const perNightPrice = 79; // Example per night price
-    const weeklyDiscount = 28; // Example weekly discount
-    const cleaningFee = 62; // Example cleaning fee
-    const serviceFee = 83; // Example service fee
-    const occupancyTaxesAndFees = 29; // Example occupancy taxes and fees
+    const perNightPrice = 79; 
+    const weeklyDiscount = 28; 
+    const cleaningFee = 62; 
+    const serviceFee = 83; 
+    const occupancyTaxesAndFees = 29;
   
-    // Handle date input changes
+
+    const getTodayDateString = () => {
+        const today = new Date();
+        let month = today.getMonth() + 1;
+        let day = today.getDate();
+    
+        month = month < 10 ? `0${month}` : month;
+        day = day < 10 ? `0${day}` : day;
+    
+        return `${today.getFullYear()}-${month}-${day}`;
+      };
+
+
     const handleCheckInChange = (e) => {
       setCheckInDate(e.target.value);
+      setCheckOutDate('');
     };
   
     const handleCheckOutChange = (e) => {
       setCheckOutDate(e.target.value);
     };
   
-    // Calculate total price based on per night price ($79)
     const calculateTotalPrice = () => {
       const numberOfNights = calculateNumberOfNights();
   
-      // Calculate subtotal
       const subtotal = perNightPrice * numberOfNights;
   
-      // Calculate total including fees and discounts
       const total = subtotal - weeklyDiscount + cleaningFee + serviceFee + occupancyTaxesAndFees;
   
       return total;
     };
   
-    // Helper function to calculate number of nights between check-in and check-out
     const calculateNumberOfNights = () => {
       if (!checkInDate || !checkOutDate) return 0;
   
-      const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+      const oneDay = 24 * 60 * 60 * 1000; 
       const startDate = new Date(checkInDate);
       const endDate = new Date(checkOutDate);
   
       const diffDays = Math.round(Math.abs((startDate - endDate) / oneDay));
   
-      return diffDays;
+      return diffDays+1;
     };
   return (
     <div className="cost-and-book">
@@ -59,6 +67,7 @@ const BookRoom = ({ price }) => {
               id="checkIn"
               value={checkInDate}
               onChange={handleCheckInChange}
+              min={getTodayDateString()}
             />
           </span>
           <span>
@@ -68,6 +77,7 @@ const BookRoom = ({ price }) => {
               id="checkOut"
               value={checkOutDate}
               onChange={handleCheckOutChange}
+              min={checkInDate}
             />
           </span>
         </div>
