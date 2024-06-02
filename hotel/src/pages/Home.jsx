@@ -93,7 +93,7 @@ const Home = () => {
                   />
                 )}
               </span>
-              <Link to={`roomdetails/${index}`}>
+              <Link to={`roomdetails/${index+1}`}>
                 <div className="info">
                   <h2>Well Furnished Apartment</h2>
                   <span className="rating-field">

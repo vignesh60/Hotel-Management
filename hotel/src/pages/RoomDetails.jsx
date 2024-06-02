@@ -19,11 +19,12 @@ import $ from "jquery";
 
 import SwiperRooms from "../SwiperRooms";
 import { useParams } from "react-router-dom";
+import BookRoom from "./BookRoom";
 
 const RoomDetails = () => {
   const { id } = useParams();
 
-  const roomId = 6;
+  const roomId = id;
   const [room, setRoom] = useState(null);
   const [active,setActive] = useState(0);
   const [matchingIndexes, setMatchingIndexes] = useState([]);
@@ -102,7 +103,7 @@ const RoomDetails = () => {
           </div>
         </div>
         <div className="image-right-field">
-          {images.slice(1,5).map((image, index) => {
+          {images.slice(matchingIndexes[1],images.length).map((image, index) => {
             const [title, filename] = image.split("+"); 
             return (
               <>
@@ -138,46 +139,8 @@ const RoomDetails = () => {
             </p>
           </div>
         </div>
-        <div className="cost-and-book">
-          <div className="booking-card">
-            <p>
-              <b>${room.price} </b>/ night
-            </p>
-            <div className="dates-field">
-              <span>
-                <label htmlFor="checking">CKECK-IN</label>
-                <input type="date" id="date" />
-              </span>
-              <span>
-                <label htmlFor="checking">CKECK-OUT</label>
-                <input type="date" id="date" />
-              </span>
-            </div>
-            <ul>
-              <li>
-                <p>$79 x 7 nights</p> <p>$555</p>
-              </li>
-              <li>
-                <p>Weekly discount</p> <p style={{ color: "red" }}>-$28</p>
-              </li>
-              <li>
-                <p>Cleaning fee</p> <p>$62</p>
-              </li>
-              <li>
-                <p>Service fee</p> <p>$83</p>
-              </li>
-              <li>
-                <p>Occupancy taxes and fees</p> <p>$29</p>
-              </li>
-            </ul>
-            <span className="total">
-              <p>Total</p>
-              <p style={{ color: "green", fontWeight: "500" }}>$701</p>
-            </span>
-            <button className="btn">Continue to Book</button>
-          </div>
+        <BookRoom price={room.price}/>
         </div>
-      </div>
 
       <div className="amenities-rationg-other-details">
         <div className="amenities">
