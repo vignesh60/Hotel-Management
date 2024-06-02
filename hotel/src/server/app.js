@@ -135,14 +135,14 @@ app.post("/login", (req, res) => {
 /* ------------------------adding-rooms----------------------- */
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) =>{
-    cb(null, './uploads/')
+  destination: (req, file, cb) => {
+    cb(null, "./uploads/");
   },
   filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
+    const roomTitle = req.body.title.replace(/\s+/g, "-"); // Replace spaces in title with hyphens
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const filename = `${roomTitle}+${file.originalname}`; // Concatenate room title and original filename
+    cb(null, filename);
   },
 });
 
@@ -261,6 +261,23 @@ app.get("/getRoom/:roomId", (req, res) => {
   });
 });
 
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+const fs = require('fs');
+
+app.get("/images", (req, res) => {
+  fs.readdir(path.join(__dirname, "uploads"), (err, files) => {
+    if (err) {
+      console.error("Error reading directory:", err);
+      res.status(500).send("Error reading directory");
+    } else {
+      const imageFiles = files.filter((file) =>
+        /\.(jpg|jpeg|png|gif)$/i.test(file)
+      ); // Filter image files
+      res.json(imageFiles);
+    }
+  });
+});
 
 
 

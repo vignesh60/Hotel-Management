@@ -27,6 +27,8 @@ const RoomDetails = () => {
     window.scrollTo(0, 0);
   });
 
+  
+
   return (
     <div className="room-details-container">
       <div className="rooms-iamge-field">
