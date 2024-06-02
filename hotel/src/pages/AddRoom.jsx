@@ -87,174 +87,228 @@ const AddRoom = () => {
     <div className="add-room-container">
       <h2>Add New Room</h2>
       <form onSubmit={handleSubmit} encType="multipart/formdata">
-        <input
-          type="text"
-          name="title"
-          placeholder="Title"
-          value={formData.title}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="location"
-          placeholder="Location"
-          value={formData.location}
-          onChange={handleChange}
-          required
-        />
-        <textarea
-          name="description"
-          placeholder="Description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="number"
-          name="price"
-          placeholder="Price per night"
-          value={formData.price}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="number"
-          name="rating"
-          placeholder="Rating"
-          value={formData.rating}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="number"
-          name="reviews"
-          placeholder="Number of reviews"
-          value={formData.reviews}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="number"
-          name="beds"
-          placeholder="Number of beds"
-          value={formData.beds}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="number"
-          name="sleeps"
-          placeholder="Number of sleeps"
-          value={formData.sleeps}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="number"
-          name="sq_ft"
-          placeholder="Square feet"
-          value={formData.sq_ft}
-          onChange={handleChange}
-          required
-        />
-        <label>
-          <input
-            type="checkbox"
-            name="garden_view"
-            checked={formData.garden_view}
-            onChange={handleChange}
-          />{" "}
-          Garden view
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="wifi"
-            checked={formData.wifi}
-            onChange={handleChange}
-          />{" "}
-          Wifi
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="washer"
-            checked={formData.washer}
-            onChange={handleChange}
-          />{" "}
-          Washer
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="air_conditioning"
-            checked={formData.air_conditioning}
-            onChange={handleChange}
-          />{" "}
-          Air Conditioning
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="refrigerator"
-            checked={formData.refrigerator}
-            onChange={handleChange}
-          />{" "}
-          Refrigerator
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="kitchen"
-            checked={formData.kitchen}
-            onChange={handleChange}
-          />{" "}
-          Kitchen
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="pets_allowed"
-            checked={formData.pets_allowed}
-            onChange={handleChange}
-          />{" "}
-          Pets Allowed
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="dryer"
-            checked={formData.dryer}
-            onChange={handleChange}
-          />{" "}
-          Dryer
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="security_cameras"
-            checked={formData.security_cameras}
-            onChange={handleChange}
-          />{" "}
-          Security_cameras
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="bicycles"
-            checked={formData.bicycles}
-            onChange={handleChange}
-          />{" "}
-          Bicycles
-        </label>
+        <div className="row text-field">
+          <div className="col">
+            <label>
+              Title
+              <input
+                type="text"
+                name="title"
+                placeholder="Title"
+                value={formData.title}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <label>
+              Location
+              <input
+                type="text"
+                name="location"
+                placeholder="Location"
+                value={formData.location}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <label>
+              Description
+              <textarea
+                name="description"
+                placeholder="Description"
+                value={formData.description}
+                onChange={handleChange}
+                required
+              />
+              </label>
+              <label>
+              Price
+              <input
+                type="number"
+                name="price"
+                placeholder="Price per night"
+                value={formData.price}
+                onChange={handleChange}
+                required
+              />
+            </label>
+          </div>
+          <div className="col">
+            <label>
+              Rating
+              <input
+                type="number"
+                name="rating"
+                placeholder="Rating"
+                value={formData.rating}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <label>
+              Reviews
+              <input
+                type="number"
+                name="reviews"
+                placeholder="Number of reviews"
+                value={formData.reviews}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <label>
+              Number of Beds
+              <input
+                type="number"
+                name="beds"
+                placeholder="Number of beds"
+                value={formData.beds}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <label>
+              Sleep Count
+              <input
+                type="number"
+                name="sleeps"
+                placeholder="Number of sleeps"
+                value={formData.sleeps}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <label>
+              Square Feet
+              <input
+                type="number"
+                name="sq_ft"
+                placeholder="Square feet"
+                value={formData.sq_ft}
+                onChange={handleChange}
+                required
+              />
+            </label>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <label>
+              <input
+                type="checkbox"
+                name="garden_view"
+                checked={formData.garden_view}
+                onChange={handleChange}
+              />{" "}
+              Garden view
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="wifi"
+                checked={formData.wifi}
+                onChange={handleChange}
+              />{" "}
+              Wifi
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="washer"
+                checked={formData.washer}
+                onChange={handleChange}
+              />{" "}
+              Washer
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="air_conditioning"
+                checked={formData.air_conditioning}
+                onChange={handleChange}
+              />{" "}
+              Air Conditioning
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="refrigerator"
+                checked={formData.refrigerator}
+                onChange={handleChange}
+              />{" "}
+              Refrigerator
+            </label>
+          </div>
+          <div className="col">
+            <label>
+              <input
+                type="checkbox"
+                name="kitchen"
+                checked={formData.kitchen}
+                onChange={handleChange}
+              />{" "}
+              Kitchen
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="pets_allowed"
+                checked={formData.pets_allowed}
+                onChange={handleChange}
+              />{" "}
+              Pets Allowed
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="dryer"
+                checked={formData.dryer}
+                onChange={handleChange}
+              />{" "}
+              Dryer
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="security_cameras"
+                checked={formData.security_cameras}
+                onChange={handleChange}
+              />{" "}
+              Security_cameras
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="bicycles"
+                checked={formData.bicycles}
+                onChange={handleChange}
+              />{" "}
+              Bicycles
+            </label>
+          </div>
+        </div>
 
-        <input
-          type="file"
-          name="images"
-          multiple
-          onChange={handleImageChange}
-        />
+        <label className="custom-file-upload">
+          <h3>Add Room Images</h3>
+          <input
+            type="file"
+            name="images"
+            multiple
+            onChange={handleImageChange}
+            className="file-input"
+          />
+          <span className="button">Choose Images</span>
+          {formData.images.length > 0 && (
+            <div className="selected-images">
+              <h4>Selected Images:</h4>
+              <ul>
+                {Array.from(formData.images).map((image, index) => (
+                  <li key={index}>{image.name}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </label>
         <button type="submit" className="btn">
           Add Room
         </button>

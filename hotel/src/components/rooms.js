@@ -17,6 +17,7 @@ import room4 from "../components/assets/listofrooms/room (4).png";
 import room5 from "../components/assets/listofrooms/room (5).png";
 import room6 from "../components/assets/listofrooms/room (6).png";
 import room7 from "../components/assets/No2-room/room (1).png";
+import room8 from "../components/assets/No1-room/room1.png"
 
 const Rooms = [
   {
@@ -31,7 +32,7 @@ const Rooms = [
   { room: [room5,room5] },
   { room: [room6,room6] },
   {
-    room: [room2, room7, room1, room3, room4, room5, room6],
+    room: [room8,room7,room2, room1, room3, room4, room5, room6],
   },
 ];
 

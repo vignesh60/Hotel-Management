@@ -45,6 +45,14 @@ const SideBar = () => {
                 </li>
               </Link>
               <Link
+                to="addroom"
+                style={{ textDecoration: "none", color: "#fff" }}
+              >
+                <li>
+                  <IoBed className="icons" /> Add Room
+                </li>
+              </Link>
+              <Link
                 to="roomslist"
                 style={{ textDecoration: "none", color: "#fff" }}
               >

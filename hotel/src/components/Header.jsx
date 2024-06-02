@@ -31,6 +31,7 @@ const Header = () => {
     if (confirmation) {
       localStorage.removeItem("isLogin");
       setAccount(false);
+      window.location.reload();
     }
   };
 
