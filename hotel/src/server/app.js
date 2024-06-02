@@ -12,6 +12,7 @@ const port = 5000;
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.static("./uploads"));
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -135,7 +136,7 @@ app.post("/login", (req, res) => {
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) =>{
-    cb(null, './uplods/')
+    cb(null, './uploads/')
   },
   filename: function (req, file, cb) {
     cb(
@@ -182,6 +183,8 @@ app.post("/addRoom", (req, res) => {
 
     // Extract uploaded image URLs
     const images = req.files.map((file) => `/uploads/${file.filename}`);
+
+    console.log(req.files);
 
     // Convert boolean fields to integers
     const gardenViewInt = garden_view ? 1 : 0;
@@ -230,9 +233,6 @@ app.post("/addRoom", (req, res) => {
     });
   });
 });
-
-// Serve uploaded images statically
-app.use("/uploads", express.static("uploads"));
 
 
 

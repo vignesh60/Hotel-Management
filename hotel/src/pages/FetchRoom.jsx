@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import img from "../uploads/images-1717269581793-211272622.png";
-
-
 const FetchRoom = () => {
-    const roomId = 3;
+    const roomId = 1;
     const [room, setRoom] = useState(null);
 
     useEffect(() => {
@@ -22,7 +19,7 @@ const FetchRoom = () => {
     }, [roomId]);
 
     if (!room) {
-        return <div>Loading...</div>;
+        return <div style={{paddingTop: "5rem"}}>Loading...</div>;
     }
 
     return (
