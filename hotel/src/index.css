@@ -474,7 +474,7 @@ form input:focus,textarea:focus {
   flex-direction: column;
   gap: 0.7rem;
   padding: 0.6rem;
-  border-radius: 1rem;
+  border-radius: 0.6rem;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   transition: 0.4s;
@@ -488,7 +488,7 @@ form input:focus,textarea:focus {
 
 .cards-container .card img {
   width: 100%;
-  border-radius: 1rem;
+  border-radius: 0.6rem;
 }
 
 .card ul {
@@ -543,7 +543,7 @@ form input:focus,textarea:focus {
 .rooms-container .cards-container {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
   gap: 1rem;
   row-gap: 2rem;
 }
@@ -588,6 +588,21 @@ form input:focus,textarea:focus {
     display: grid !important;
     grid-template-columns: 1fr 1fr;
   }
+  .card h2 {
+    font-size: 1.3rem !important;
+  }
+
+  .card p {
+    font-size: 0.7rem !important;
+  }
+
+  .card li {
+    font-size: 0.6rem;
+  }
+
+  .card li .icon {
+    font-size: 1.2rem !important;
+  }
 }
 
 @media(max-width:500px) {
@@ -609,6 +624,9 @@ form input:focus,textarea:focus {
   .rooms-container .cards-container {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+  .rooms-container .card {
+    display: flex !important;
   }
 }
 
@@ -863,6 +881,17 @@ form input:focus,textarea:focus {
     border-radius: 0;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

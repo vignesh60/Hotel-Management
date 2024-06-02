@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 import SwiperRooms from "../SwiperRooms";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const Home = () => {
   const [cards, setCards] = useState([
@@ -35,7 +36,7 @@ const Home = () => {
   ]);
 
   const [favorite, setFavorite] = useState(false);
-  
+
   useEffect(() => {
     const storedLoginState = localStorage.getItem("isLogin");
     if (storedLoginState === "true") {
@@ -43,6 +44,66 @@ const Home = () => {
     }
   }, []);
 
+  const [room, setRoom] = useState(null);
+  const [images, setImages] = useState([]);
+  const [matchingIndexes, setMatchingIndexes] = useState([]);
+
+  useEffect(() => {
+    const fetchRoom = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/getRooms");
+        setRoom(res.data);
+      } catch (error) {
+        console.error("Error fetching room details: ", error);
+      }
+    };
+
+    fetchRoom();
+  }, []);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/images");
+        setImages(response.data);
+      } catch (error) {
+        console.error("Error fetching images:", error);
+      }
+    };
+
+    fetchImages();
+  }, []);
+
+  useEffect(() => {
+    if (!room || !images) return;
+
+    const newMatchingIndexes = room
+      .map((roomItem) => {
+        // Find the first index where the title matches the room's title
+        const index = images.findIndex((image) => {
+          const [title, filename] = image.split("+");
+          return title === roomItem.title;
+        });
+
+        return index !== -1 ? index : null; // Return index if found, otherwise null
+      })
+      .filter((index) => index !== null); // Filter out null indexes
+
+    setMatchingIndexes(newMatchingIndexes);
+  }, [room, images]);
+
+  const LoadingSpinner = () => <div className="spinner"></div>;
+
+  if (!room || !images) {
+    return (
+      <div
+        style={{ paddingTop: "5rem", textAlign: "center" }}
+        className="spinner-field"
+      >
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
     <div className="home-container">
@@ -76,10 +137,15 @@ const Home = () => {
       <div className="rooms-container">
         <h1>Available Rooms</h1>
         <div className="cards-container">
-          {cards.map((card, index) => (
+          {room.map((card, index) => (
             <div className="card" key={index}>
               <span style={{ position: "relative" }}>
-                <img src={card} alt="loading" />
+                <img
+                  src={`http://localhost:5000/uploads/${
+                    images[matchingIndexes[index]]
+                  }`}
+                  alt="image"
+                />
                 {favorite ? (
                   <MdFavorite
                     className="favorite"
@@ -93,28 +159,29 @@ const Home = () => {
                   />
                 )}
               </span>
-              <Link to={`roomdetails/${index+1}`}>
+              <Link to={`roomdetails/${index + 1}`}>
                 <div className="info">
-                  <h2>Well Furnished Apartment</h2>
+                  <h2>{card.title}</h2>
                   <span className="rating-field">
                     <span className="rating">
-                      4.5 <FaStar />
+                      {card.rating} <FaStar />
                     </span>
-                    <p>(600+ reviews)</p>
+                    <p>({card.reviews} reviews)</p>
                   </span>
-                  <p>100 Smart Street, LA, India</p>
+                  <p>{card.location}</p>
                   <p className="cost">
-                    <b>$2015</b> / 5 night
+                    <b>${card.price}</b> / night
                   </p>
                   <ul className="flex">
                     <li>
-                      <IoBedOutline className="icon" /> 4 Beds
+                      <IoBedOutline className="icon" /> {card.beds} Beds
                     </li>
                     <li>
-                      <HiOutlineUser className="icon" /> 8 Sleeps
+                      <HiOutlineUser className="icon" /> {card.sleeps} Sleeps
                     </li>
                     <li>
-                      <TbArrowAutofitHeight className="icon" /> 1,340 Sq Ft
+                      <TbArrowAutofitHeight className="icon" /> {card.sq_ft} Sq
+                      Ft
                     </li>
                   </ul>
                 </div>

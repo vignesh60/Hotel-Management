@@ -261,6 +261,34 @@ app.get("/getRoom/:roomId", (req, res) => {
   });
 });
 
+
+
+
+
+app.get("/getRooms", (req, res) => {
+  roomdb.query("SELECT * FROM rooms", (err, results) => {
+    if (err) {
+      console.error("Error fetching room details:", err);
+      res.status(500).send("Error fetching room details");
+      return;
+    }
+    if (results.length > 0) {
+      res.json(results); // Return all rows from the rooms table
+    } else {
+      res.status(404).send("No rooms found");
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const fs = require('fs');
