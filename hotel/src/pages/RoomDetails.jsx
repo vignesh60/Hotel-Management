@@ -23,7 +23,7 @@ import { useParams } from "react-router-dom";
 const RoomDetails = () => {
   const { id } = useParams();
 
-  const roomId = 4;
+  const roomId = 6;
   const [room, setRoom] = useState(null);
   const [active,setActive] = useState(0);
   const [matchingIndexes, setMatchingIndexes] = useState([]);
@@ -55,14 +55,19 @@ const RoomDetails = () => {
 
     fetchImages();
 
+    
+  }, []);
+
+  useEffect(() => {
     const matchingIndexes = images.map((image, index) => {
       const [title, filename] = image.split('+');
       return title === room.title ? index : null; // Return index if title matches, otherwise null
     }).filter(index => index !== null); 
     
-    setMatchingIndexes(matchingIndexes)
-    
-  }, []);
+    setMatchingIndexes(matchingIndexes);
+  
+  }, [images]);
+
 
   if (!room) {
     return <div style={{ paddingTop: "5rem" }}>Loading...</div>;
@@ -97,7 +102,7 @@ const RoomDetails = () => {
           </div>
         </div>
         <div className="image-right-field">
-          {images.map((image, index) => {
+          {images.slice(1,5).map((image, index) => {
             const [title, filename] = image.split("+"); 
             return (
               <>

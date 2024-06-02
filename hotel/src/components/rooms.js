@@ -1,8 +1,8 @@
-import img1 from "../components/assets/No1-room/room1.avif";
-import img2 from "../components/assets/No1-room/room2.avif";
-import img3 from "../components/assets/No1-room/room3.avif";
-import img4 from "../components/assets/No1-room/room4.avif";
-import img5 from "../components/assets/No1-room/room5.avif";
+import img1 from "../components/assets/No1-room/room1.png";
+import img2 from "../components/assets/No1-room/room2.png";
+import img3 from "../components/assets/No1-room/room3.png";
+import img4 from "../components/assets/No1-room/room4.png";
+import img5 from "../components/assets/No1-room/room5.png";
 
 import r1 from "../components/assets/No2-room/room (1).png";
 import r2 from "../components/assets/No2-room/room (2).png";
