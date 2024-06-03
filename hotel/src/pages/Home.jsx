@@ -128,7 +128,7 @@ const Home = () => {
       </div>
       <div className="luxurious-room">
         <div className="left-field">
-          <h1>Explore Our Luxurious Rooms</h1>
+          <h1 className="colored-text">Explore Our Luxurious Rooms</h1>
           <p>
             Experience comfort and luxury with our meticulously designed rooms,
             perfect for relaxation or business.
@@ -141,7 +141,7 @@ const Home = () => {
       </div>
 
       <div className="rooms-container">
-        <h1>Available Rooms</h1>
+        <h1 className="colored-text">Available Rooms</h1>
         <div className="cards-container">
           {room.map((card, index) => (
             <div className="card" key={index}>
@@ -199,7 +199,7 @@ const Home = () => {
 
       <div className="discover-more-field luxurious-room">
         <div className="left-field">
-          <h1>Explore Property Rental Options</h1>
+          <h1 className="colored-text">Explore Property Rental Options</h1>
           <p>
             Discover a wide range of properties available for rent. Whether
             you're looking for a cozy apartment, a spacious villa, or a charming

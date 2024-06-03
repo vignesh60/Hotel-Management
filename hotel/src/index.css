@@ -42,6 +42,12 @@ a {
   color: var(--color-black);
 }
 
+.colored-text {
+  background-clip: text !important;
+  color: transparent;
+  background: linear-gradient(to right, #00070b 0%, #6d09f9 60%);
+}
+
 
 
 
@@ -471,11 +477,16 @@ form input:focus,textarea:focus {
   padding: 11% 5%;
 }
 
-.banner-container h1 {
+.banner-container h1, .banner-container p {
   font-size: 5vw;
   background-clip: text !important;
   color: transparent;
   background: linear-gradient(to right, #00070b 0%, #6d09f9 60%);
+}
+
+.banner-container p {
+  font-weight: 600;
+  font-size: 1.6vw;
 }
 
 .home-container .luxurious-room {
@@ -577,7 +588,6 @@ form input:focus,textarea:focus {
 }
 
 .rooms-container h1 {
-  color: var(--color-blue);
   font-size: 3rem;
 }
 

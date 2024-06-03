@@ -9,7 +9,7 @@ const DashBoard = () => {
   const [images, setImages] = useState(Rooms[7].room);
   return (
     <div className="dashboard-container">
-      <h1>Dashboard</h1>
+      <h1 className="colored-text">Dashboard</h1>
       <div className="booked-rooms">
         {images.map((card, index) => (
           <div className="card" key={index}>
