@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import RoomDetails from "./pages/RoomDetails";
 import AddRoom from "./pages/AddRoom";
 import FetchRoom from "./pages/FetchRoom";
+import DashBoard from "./pages/DashBoard";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
     {path: "/signup", element:<Home />},
     {path: "/addroom", element:<AddRoom />},
     {path: "/fetchroom", element:<FetchRoom />},
+    {path: "/dashboard", element:<DashBoard />},
   ],
   },
 ]);
