@@ -24,6 +24,9 @@ import axios from "axios";
 import $ from 'jquery';
 
 const Home = () => {
+  
+  
+  
   const [cards, setCards] = useState([
     room10,
     room1,
@@ -37,18 +40,20 @@ const Home = () => {
   ]);
 
   const [favorite, setFavorite] = useState(false);
-
+  
   useEffect(() => {
     const storedLoginState = localStorage.getItem("isLogin");
     if (storedLoginState === "true") {
       toast.success("User Login Successfully.");
     }
-  }, []);
+  },[]);
   
-
+  
   const [room, setRoom] = useState(null);
   const [images, setImages] = useState([]);
   const [matchingIndexes, setMatchingIndexes] = useState([]);
+
+
 
   useEffect(() => {
     const fetchRoom = async () => {
@@ -78,7 +83,7 @@ const Home = () => {
 
   useEffect(() => {
     if (!room || !images) return;
-
+    
     const newMatchingIndexes = room
       .map((roomItem) => {
         // Find the first index where the title matches the room's title
@@ -95,13 +100,13 @@ const Home = () => {
   }, [room, images]);
 
   const LoadingSpinner = () => <div className="spinner"></div>;
-
+  
   if (!room || !images) {
     return (
       <div
-        style={{ paddingTop: "5rem", textAlign: "center" }}
+      style={{ paddingTop: "5rem", textAlign: "center" }}
         className="spinner-field"
-      >
+        >
         <LoadingSpinner />
       </div>
     );
@@ -161,7 +166,7 @@ const Home = () => {
                   />
                 )}
               </span>
-              <Link to={`roomdetails/${index + 1}`}>
+              <Link to={`roomdetails/${card.id}`}>
                 <div className="info">
                   <h2>{card.title}</h2>
                   <span className="rating-field">

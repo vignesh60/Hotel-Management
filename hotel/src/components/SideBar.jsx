@@ -43,14 +43,25 @@ const SideBar = () => {
         <div className="child-container">
           <div className="categories">
             <ul>
+              {account && (
+                <Link
+                  to="dashboard"
+                  style={{ textDecoration: "none", color: "#fff" }}
+                >
+                  <li>
+                    <RiDashboardFill className="icons" /> Dashboard
+                  </li>
+                </Link>
+              )}
               <Link
-                to="dashboard"
-                style={{ textDecoration: "none", color: "#fff" }}
-              >
-                <li>
-                  <RiDashboardFill className="icons" /> Dashboard
-                </li>
-              </Link>
+                  to="/"
+                  style={{ textDecoration: "none", color: "#fff" }}
+                >
+                  <li>
+                    <RiDashboardFill className="icons" /> 
+                    Home
+                  </li>
+                </Link>
               {account && (
                 <Link
                   to="addroom"
