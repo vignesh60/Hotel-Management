@@ -21,12 +21,9 @@ import SwiperRooms from "../SwiperRooms";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import $ from 'jquery';
+import $ from "jquery";
 
 const Home = () => {
-  
-  
-  
   const [cards, setCards] = useState([
     room10,
     room1,
@@ -40,20 +37,17 @@ const Home = () => {
   ]);
 
   const [favorite, setFavorite] = useState(false);
-  
+
   useEffect(() => {
     const storedLoginState = localStorage.getItem("isLogin");
     if (storedLoginState === "true") {
       toast.success("User Login Successfully.");
     }
-  },[]);
-  
-  
+  }, []);
+
   const [room, setRoom] = useState(null);
   const [images, setImages] = useState([]);
   const [matchingIndexes, setMatchingIndexes] = useState([]);
-
-
 
   useEffect(() => {
     const fetchRoom = async () => {
@@ -83,7 +77,7 @@ const Home = () => {
 
   useEffect(() => {
     if (!room || !images) return;
-    
+
     const newMatchingIndexes = room
       .map((roomItem) => {
         // Find the first index where the title matches the room's title
@@ -100,41 +94,46 @@ const Home = () => {
   }, [room, images]);
 
   const LoadingSpinner = () => <div className="spinner"></div>;
-  
+
   if (!room || !images) {
     return (
       <div
-      style={{ paddingTop: "5rem", textAlign: "center" }}
+        style={{ paddingTop: "5rem", textAlign: "center" }}
         className="spinner-field"
-        >
+      >
         <LoadingSpinner />
       </div>
     );
   }
 
   return (
-    <div className="home-container" style={localStorage.getItem('isLogin') === 'true' ? {paddingTop: "5.5rem"} : {}}>
+    <div
+      className="home-container"
+      style={
+        localStorage.getItem("isLogin") === "true"
+          ? { paddingTop: "5.5rem" }
+          : {}
+      }
+    >
       <div className="banner-container">
         <h1>
-          Find an apartment for
+          Find your perfect hotel room
           <br />
-          your vaction
+          for your next getaway
         </h1>
         <p>
-          We have several thousand apartments
-          <br /> for every taste in every corner of the globe
+          Discover thousands of hotel rooms
+          <br /> suited to every preference, worldwide
         </p>
       </div>
       <div className="luxurious-room">
         <div className="left-field">
-          <h1>This is the Luxurious Room</h1>
+          <h1>Explore Our Luxurious Rooms</h1>
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum
-            aliquid alias libero dolor? Libero ut officia veniam vero temporibus
-            id veritatis magnam? Commodi et illum beatae ex dignissimos ipsa
-            ullam.
+            Experience comfort and luxury with our meticulously designed rooms,
+            perfect for relaxation or business.
           </p>
-          <button className="btn">Book</button>
+          <button className="btn">Book Now</button>
         </div>
         <div className="right-field">
           <img src={lux_room} alt="loading" />
@@ -200,15 +199,17 @@ const Home = () => {
 
       <div className="discover-more-field luxurious-room">
         <div className="left-field">
-          <h1>Discover More About Property Rental</h1>
+          <h1>Explore Property Rental Options</h1>
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum
-            aliquid alias libero dolor? Libero ut officia veniam vero temporibus
-            id veritatis magnam? Commodi et illum beatae ex dignissimos ipsa
-            ullam.Libero ut officia veniam vero temporibus id veritatis magnam?
-            Commodi et illum beatae ex dignissimos ipsa ullam.
+            Discover a wide range of properties available for rent. Whether
+            you're looking for a cozy apartment, a spacious villa, or a charming
+            cottage, we have something for every traveler.
           </p>
-          <button className="btn">Book</button>
+          <p>
+            Our properties are located in prime locations across the globe,
+            ensuring you find the perfect accommodation for your next adventure.
+          </p>
+          <button className="btn">View Rentals</button>
         </div>
         <div className="right-field">
           <img src={swimming} alt="loading" />

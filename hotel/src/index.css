@@ -79,6 +79,8 @@ a {
 
 
 
+
+
 /* -------------------NAVEBAR----------------------- */
 
 .nav_container {
@@ -1138,14 +1140,20 @@ form input:focus,textarea:focus {
 
 
 .footer {
-  padding: 50px 15% 10px;
+  padding: 50px 5% 10px;
   width: 100%;
   border-top: 6px solid #ddd;
 }
 
+.child-footer {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+}
+
 .footer h2 {
   font-size: 18px;
-  font-weight: 400px;
+  font-weight: 600;
   margin-bottom: 30px;
 }
 
@@ -1176,16 +1184,42 @@ form input:focus,textarea:focus {
   padding: 10px 0;
 }
 
-.footer .copy-text {
-  margin-top: 20px;
-  font-size: 14px;
-  margin-bottom: 10px;
+.footer .copy-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-@media (max-width:650px) {
+.footer .social-icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.social-icons .social-icon{
+  font-size: 1.5rem;
+}
+
+.social-icons a:first-child {
+  color: var(--color-blue);
+}
+.social-icons a:nth-child(2) {
+  color: #fa3451;
+}
+.social-icons a:nth-child(3) {
+  color: #0b26f3;
+}
+.social-icons a:first-child {
+  color: var(--color-blue);
+}
+
+@media (max-width:680px) {
   .row {
     flex-wrap: wrap;
-    color: #e5e3e3;
+  }
+
+  .row h2 {
+    color: var(--color-black);
   }
 
   .buttons-container ul li a {
@@ -1194,5 +1228,8 @@ form input:focus,textarea:focus {
 
   .play-pause {
     width: 20dvw;
+  }
+  .child-footer {
+    grid-template-columns: 1fr;
   }
 }
