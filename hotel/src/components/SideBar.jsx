@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { IoCloseOutline } from "react-icons/io5";
+import { IoCloseOutline, IoHome } from "react-icons/io5";
 import $ from "jquery";
 import { Link } from "react-router-dom";
 import Logo from "../components/assets/logo.png";
@@ -58,7 +58,7 @@ const SideBar = () => {
                   style={{ textDecoration: "none", color: "#fff" }}
                 >
                   <li>
-                    <RiDashboardFill className="icons" /> 
+                    <IoHome className="icons" /> 
                     Home
                   </li>
                 </Link>

@@ -4,7 +4,7 @@ const BookRoom = ({ price }) => {
     const [checkInDate, setCheckInDate] = useState('');
     const [checkOutDate, setCheckOutDate] = useState('');
   
-    const perNightPrice = 79; 
+    const perNightPrice = price; 
     const weeklyDiscount = 28; 
     const cleaningFee = 62; 
     const serviceFee = 83; 

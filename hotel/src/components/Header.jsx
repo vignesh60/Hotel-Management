@@ -6,6 +6,7 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import Profile from "./assets/person5.jpeg";
 import { HiMiniBars3 } from "react-icons/hi2";
 import $ from "jquery";
+import { IoIosArrowDown } from "react-icons/io";
 
 const Header = () => {
   const [account, setAccount] = useState(false);
@@ -37,13 +38,23 @@ const Header = () => {
 
   $(document).ready(function () {
     $(".search_container input").focus(function () {
-      $(".search_container").css({borderColor: "#2591f7",boxShadow: "0 0 0px 3px #197cf54d"});
+      $(".search_container").css({
+        borderColor: "#2591f7",
+        boxShadow: "0 0 0px 3px #197cf54d",
+      });
 
       $(".search_container input").blur(function () {
-        $(".search_container").css({border: "2px solid #197cf593",boxShadow: "0 0 0 0"});
+        $(".search_container").css({
+          border: "2px solid #197cf593",
+          boxShadow: "0 0 0 0",
+        });
       });
     });
   });
+
+  const handleProfile = () => {
+    $(".logout-container").toggle();
+  };
 
   return (
     <nav>
@@ -64,12 +75,24 @@ const Header = () => {
             <div className="notification">
               <IoNotificationsOutline className="icon" />
             </div>
-            <Link to="/profile">
+            <span className="profile-field" onClick={() => handleProfile()}>
               <img src={Profile} alt="Profile" className="profile" />
-            </Link>
-            <button className="btn log" onClick={() => handleLogout()}>
+              <p>
+                Vignesh <IoIosArrowDown />
+              </p>
+
+              <div className="logout-container">
+                <Link to="profile">
+                  <button>Profile</button>
+                </Link>
+                <button onClick={() => handleLogout()}>
+                  Logout
+                </button>
+              </div>
+            </span>
+            {/* <button className="btn log" onClick={() => handleLogout()}>
               Logout
-            </button>
+            </button> */}
           </div>
         ) : (
           <div className="signin-signup">
