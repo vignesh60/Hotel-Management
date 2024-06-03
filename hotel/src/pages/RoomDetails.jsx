@@ -162,54 +162,54 @@ const RoomDetails = () => {
           <h1>Amenities</h1>
           <div className="row">
             <ul className="col">
-              {room.garden_view && (
+              {room.garden_view === 1 && (
                 <li>
                   <img src={a_icon1} alt="icon" /> Garden view
                 </li>
               )}
-              {room.wifi && (
+              {room.wifi === 1 && (
                 <li>
                   <img src={a_icon2} alt="icon" /> Wifi
                 </li>
               )}
-              {room.washer && (
+              {room.washer === 1 && (
                 <li>
                   <img src={a_icon3} alt="icon" /> Free washer - in building
                 </li>
               )}
-              {room.air_conditioning && (
+              {room.air_conditioning === 1 && (
                 <li>
                   <img src={a_icon4} alt="icon" /> Central air conditioning
                 </li>
               )}
-              {room.refrigerator && (
+              {room.refrigerator === 1 && (
                 <li>
                   <img src={a_icon5} alt="icon" /> Refrigerator
                 </li>
               )}
             </ul>
             <ul className="col">
-              {room.kitchen && (
+              {room.kitchen === 1 && (
                 <li>
                   <img src={a_icon6} alt="icon" /> Kitchen
                 </li>
               )}
-              {room.pets_allowed && (
+              {room.pets_allowed === 1 && (
                 <li>
                   <img src={a_icon8} alt="icon" /> Pets allowed
                 </li>
               )}
-              {room.dryer && (
+              {room.dryer === 1 && (
                 <li>
                   <img src={a_icon10} alt="icon" /> Dryer
                 </li>
               )}
-              {room.security_cameras && (
+              {room.security_cameras === 1 && (
                 <li>
                   <img src={a_icon9} alt="icon" /> Security cameras on property
                 </li>
               )}
-              {room.bicycles && (
+              {room.bicycles === 1 && (
                 <li>
                   <img src={a_icon7} alt="icon" /> Bicycles
                 </li>
