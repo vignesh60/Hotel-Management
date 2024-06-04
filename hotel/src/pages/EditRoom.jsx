@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditRoom = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [room, setRoom] = useState({
     title: "",
     location: "",
@@ -59,6 +60,7 @@ const EditRoom = () => {
     try {
       await axios.put(`http://localhost:5000/updateRoom/${id}`, room);
       alert("Room details updated successfully!");
+      navigate(`/roomdetails/${id}`);
     } catch (error) {
       console.error("Error updating room details:", error);
     }

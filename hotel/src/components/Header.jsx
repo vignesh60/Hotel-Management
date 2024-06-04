@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "./assets/logo.png";
 import { IoSearchOutline } from "react-icons/io5";
@@ -7,15 +7,18 @@ import Profile from "./assets/person5.jpeg";
 import { HiMiniBars3 } from "react-icons/hi2";
 import $ from "jquery";
 import { IoIosArrowDown } from "react-icons/io";
+import { UserContext } from "../pages/UserContext"
 
 const Header = () => {
   const [account, setAccount] = useState(false);
+  const { userinfo } = useContext(UserContext);
   const handleSideBar = () => {
     $(".main-container").css({ display: "block" });
     setTimeout(() => {
       $(".sideBar-container").css({ transform: "translateX(0%)" });
     }, 10);
   };
+  
 
   useEffect(() => {
     const storedLoginState = localStorage.getItem("isLogin");
@@ -31,6 +34,7 @@ const Header = () => {
 
     if (confirmation) {
       localStorage.removeItem("isLogin");
+      localStorage.removeItem("email");
       setAccount(false);
       window.location.reload();
     }
@@ -78,16 +82,14 @@ const Header = () => {
             <span className="profile-field" onClick={() => handleProfile()}>
               <img src={Profile} alt="Profile" className="profile" />
               <p>
-                Vignesh <IoIosArrowDown />
+                {userinfo.username} <IoIosArrowDown />
               </p>
 
               <div className="logout-container">
-                <Link to="profile">
+                <Link to="/profile">
                   <button>Profile</button>
                 </Link>
-                <button onClick={() => handleLogout()}>
-                  Logout
-                </button>
+                <button onClick={() => handleLogout()}>Logout</button>
               </div>
             </span>
             {/* <button className="btn log" onClick={() => handleLogout()}>

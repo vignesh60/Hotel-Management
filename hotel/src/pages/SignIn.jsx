@@ -34,6 +34,7 @@ const SignIn = () => {
               password: formData.password
           });
           localStorage.setItem('isLogin','true');
+          localStorage.setItem('email',formData.email);
           alert('Login successful');
           window.location.reload();
       } catch (error) {

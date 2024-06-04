@@ -1034,6 +1034,11 @@ form input:focus,textarea:focus {
   width: 100%;
   resize: none;
   height: 9rem;
+  border-color: #197cf593;
+}
+
+.add-room-container input {
+  border-color: #197cf593;
 }
 
 .add-room-container .col label {
@@ -1049,6 +1054,7 @@ form input:focus,textarea:focus {
 .add-room-container .row2 .col label input{
   width: 1rem;
   cursor: pointer;
+  border-color: #197cf593;
 }
 
 .add-room-container .text-field label {

@@ -89,6 +89,23 @@ app.post("/register", (req, res) => {
 });
 
 
+app.get("/getUser/:email", (req, res) => {
+  const email = req.params.email; // Use req.params.email
+  db.query(
+    "SELECT * FROM users WHERE email = ?",
+    [email],
+    (err, results) => {
+      if (err) {
+        console.error("Error fetching user details:", err);
+        res.status(500).send("Error fetching user details");
+      } else {
+        res.json(results);
+      }
+    }
+  );
+});
+
+
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
@@ -394,6 +411,7 @@ app.delete("/deleteRoom/:roomId", (req, res) => {
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const fs = require('fs');
+const { log } = require('console');
 
 app.get("/images", (req, res) => {
   fs.readdir(path.join(__dirname, "uploads"), (err, files) => {
