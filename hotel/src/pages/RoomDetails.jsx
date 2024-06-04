@@ -16,17 +16,25 @@ import a_icon9 from "../components/assets/a-icons (9).png";
 import a_icon10 from "../components/assets/a-icons (10).png";
 
 import SwiperRooms from "../SwiperRooms";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import BookRoom from "./BookRoom";
 import { MdDelete } from "react-icons/md";
 
 const RoomDetails = () => {
   const { id } = useParams();
-
+const navigate = useNavigate();
   const roomId = id;
   const [room, setRoom] = useState(null);
   const [active, setActive] = useState(0);
   const [matchingIndexes, setMatchingIndexes] = useState([]);
+
+  const [account, setAccount] = useState(false);
+  useEffect(() => {
+    const storedLoginState = localStorage.getItem("isLogin");
+    if (storedLoginState === "true") {
+      setAccount(true);
+    }
+  }, [localStorage]);
 
   useEffect(() => {
     const fetchRoom = async () => {
@@ -82,6 +90,24 @@ const RoomDetails = () => {
     );
   }
 
+  /* ---------------------delete-room------------------------ */
+
+  const handleDelete = async () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this room permenently?"
+    );
+    if (confirmed) {
+      try {
+        await axios.delete(`http://localhost:5000/deleteRoom/${id}`);
+        alert("Room Deleted successfully");
+        navigate("/");
+      } catch (error) {
+        console.error("Error deleting room:", error);
+        alert("Failed to delete room. Please try again later.");
+      }
+    }
+  };
+
   /* useEffect(() => {
     window.scrollTo(0, 0);
   }); */
@@ -136,12 +162,20 @@ const RoomDetails = () => {
       </div>
       <div className="about-room-container">
         <div className="about-room">
-          <span className="edit-delete-buttons-field">
-            <Link to={`edit/${room.id}`}>
-              <button className="btn"> <FaEdit className="icon"/>Edit</button>
-            </Link>
-            <button className="btn"><MdDelete className="icon"/> Delete</button>
-          </span>
+          {account && (
+            <span className="edit-delete-buttons-field">
+              <Link to={`edit/${room.id}`}>
+                <button className="btn">
+                  {" "}
+                  <FaEdit className="icon" />
+                  Edit
+                </button>
+              </Link>
+              <button className="btn"  onClick={()=>handleDelete()}>
+                <MdDelete className="icon"/> Delete
+              </button>
+            </span>
+          )}
           <div className="name flex">
             <span>
               <h1>{room.title}</h1>

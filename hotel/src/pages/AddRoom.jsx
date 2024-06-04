@@ -22,7 +22,7 @@ const AddRoom = () => {
     dryer: 0,
     security_cameras: 0,
     bicycles: 0,
-    images: [], // Array to hold uploaded image files
+    images: [],
   });
 
   const handleChange = (e) => {

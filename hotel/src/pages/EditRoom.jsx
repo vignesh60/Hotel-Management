@@ -282,16 +282,24 @@ const EditRoom = () => {
           </div>
         </div>
 
-        <label className="custom-file-upload">
+        {/* <label className="custom-file-upload" style={{ width: "50%" }}>
           <h3>Add Room Images</h3>
           <input
             type="file"
-            name="images"
             multiple
             onChange={handleImageChange}
             className="file-input"
           />
           <span className="button">Choose Images</span>
+          {room.images.length !== 0 && (
+            <>
+              {room.images.map((image, index) => (
+                <ul className="selected-images">
+                  <li>{image}</li>
+                </ul>
+              ))}
+            </>
+          )}
           {room.images.length > 0 && (
             <div className="selected-images">
               <h4>Selected Images:</h4>
@@ -302,7 +310,7 @@ const EditRoom = () => {
               </ul>
             </div>
           )}
-        </label>
+        </label> */}
         <button type="submit" className="btn">
           Update
         </button>

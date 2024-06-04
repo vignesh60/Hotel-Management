@@ -367,6 +367,28 @@ app.put("/updateRoom/:roomId", (req, res) => {
 
 
 
+/* -----------------------------delete---------------------------------- */
+
+app.delete("/deleteRoom/:roomId", (req, res) => {
+  const roomId = req.params.roomId;
+  roomdb.query("DELETE FROM rooms WHERE id = ?", roomId, (err, result) => {
+    if (err) {
+      console.error("Error deleting room:", err);
+      res.status(500).send("Error deleting room");
+      return;
+    }
+    console.log("Room deleted successfully");
+    res.send("Room deleted successfully");
+  });
+});
+
+
+
+
+
+
+
+
 
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
