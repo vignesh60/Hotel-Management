@@ -1222,6 +1222,13 @@ form input:focus,textarea:focus {
   padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid transparent;
+  transition: 0.3s;
+}
+
+.booked-rooms .card:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.30);
+  border: 1px solid var(--color-blue);
 }
 
 .booked-rooms .card img{

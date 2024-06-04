@@ -289,6 +289,86 @@ app.get("/getRooms", (req, res) => {
 
 
 
+/* -------------------------update--------------------------- */
+
+app.put("/updateRoom/:roomId", (req, res) => {
+  const roomId = req.params.roomId;
+  const {
+    title,
+    location,
+    description,
+    price,
+    rating,
+    reviews,
+    beds,
+    sleeps,
+    sq_ft,
+    garden_view,
+    wifi,
+    washer,
+    air_conditioning,
+    refrigerator,
+    kitchen,
+    pets_allowed,
+    dryer,
+    security_cameras,
+    bicycles,
+    images,
+  } = req.body;
+
+  const updateQuery = `
+    UPDATE rooms 
+    SET title=?, location=?, description=?, price=?, rating=?, reviews=?, beds=?, sleeps=?, sq_ft=?,
+        garden_view=?, wifi=?, washer=?, air_conditioning=?, refrigerator=?, kitchen=?, pets_allowed=?,
+        dryer=?, security_cameras=?, bicycles=?, images=?
+    WHERE id=?
+  `;
+  roomdb.query(
+    updateQuery,
+    [
+      title,
+      location,
+      description,
+      price,
+      rating,
+      reviews,
+      beds,
+      sleeps,
+      sq_ft,
+      garden_view,
+      wifi,
+      washer,
+      air_conditioning,
+      refrigerator,
+      kitchen,
+      pets_allowed,
+      dryer,
+      security_cameras,
+      bicycles,
+      JSON.stringify(images),
+      roomId,
+    ],
+    (err, result) => {
+      if (err) {
+        console.error("Error updating room:", err);
+        res.status(500).send("Error updating room");
+        return;
+      }
+      console.log("Room updated successfully");
+      res.send("Room updated successfully");
+    }
+  );
+});
+
+
+
+
+
+
+
+
+
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const fs = require('fs');

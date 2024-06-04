@@ -15,9 +15,8 @@ import a_icon8 from "../components/assets/a-icons (8).png";
 import a_icon9 from "../components/assets/a-icons (9).png";
 import a_icon10 from "../components/assets/a-icons (10).png";
 
-
 import SwiperRooms from "../SwiperRooms";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import BookRoom from "./BookRoom";
 
 const RoomDetails = () => {
@@ -58,7 +57,7 @@ const RoomDetails = () => {
 
   useEffect(() => {
     if (!room || !images) return;
-    
+
     const matchingIndexes = images
       .map((image, index) => {
         const [title, filename] = image.split("+");
@@ -67,15 +66,16 @@ const RoomDetails = () => {
       .filter((index) => index !== null);
 
     setMatchingIndexes(matchingIndexes);
-  }, [room,images]);
+  }, [room, images]);
 
-  const LoadingSpinner = () => (
-    <div className="spinner"></div>
-  );
+  const LoadingSpinner = () => <div className="spinner"></div>;
 
-  if (!room ||!images) {
+  if (!room || !images) {
     return (
-      <div style={{ paddingTop: "5rem", textAlign: "center" }} className="spinner-field">
+      <div
+        style={{ paddingTop: "5rem", textAlign: "center" }}
+        className="spinner-field"
+      >
         <LoadingSpinner />
       </div>
     );
@@ -135,6 +135,12 @@ const RoomDetails = () => {
       </div>
       <div className="about-room-container">
         <div className="about-room">
+          <span>
+            <Link to={`edit/${room.id}`}>
+              <button className="btn">Edit</button>
+            </Link>
+            <button className="btn">Delete</button>
+          </span>
           <div className="name flex">
             <span>
               <h1>{room.title}</h1>
