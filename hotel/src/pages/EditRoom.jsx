@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 
 const EditRoom = () => {
   const { id } = useParams();
-  console.log(id);
   const [room, setRoom] = useState({
     title: "",
     location: "",
@@ -15,16 +14,16 @@ const EditRoom = () => {
     beds: "",
     sleeps: "",
     sq_ft: "",
-    garden_view: false,
-    wifi: false,
-    washer: false,
-    air_conditioning: false,
-    refrigerator: false,
-    kitchen: false,
-    pets_allowed: false,
-    dryer: false,
-    security_cameras: false,
-    bicycles: false,
+    garden_view: 0,
+    wifi: 0,
+    washer: 0,
+    air_conditioning: 0,
+    refrigerator: 0,
+    kitchen: 0,
+    pets_allowed: 0,
+    dryer: 0,
+    security_cameras: 0,
+    bicycles: 0,
     images: [],
   });
 
@@ -41,10 +40,13 @@ const EditRoom = () => {
   }, [id]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const newValue =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    const { name } = e.target;
+
     setRoom((prevRoom) => ({
       ...prevRoom,
-      [name]: value,
+      [name]: newValue,
     }));
   };
 
@@ -62,9 +64,22 @@ const EditRoom = () => {
     }
   };
 
+  const LoadingSpinner = () => <div className="spinner"></div>;
+
+  if (!room) {
+    return (
+      <div
+        style={{ paddingTop: "5rem", textAlign: "center" }}
+        className="spinner-field"
+      >
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   return (
     <div className="add-room-container">
-      <h2>Add New Room</h2>
+      <h2>Edit Room Details</h2>
       <form onSubmit={handleSubmit} encType="multipart/formdata">
         <div className="row text-field">
           <div className="col">
@@ -99,8 +114,8 @@ const EditRoom = () => {
                 onChange={handleChange}
                 required
               />
-              </label>
-              <label>
+            </label>
+            <label>
               Price
               <input
                 type="number"

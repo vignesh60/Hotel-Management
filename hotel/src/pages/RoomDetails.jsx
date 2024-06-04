@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FaStar } from "react-icons/fa";
+import { FaEdit, FaStar } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa6";
 import axios from "axios";
@@ -18,6 +18,7 @@ import a_icon10 from "../components/assets/a-icons (10).png";
 import SwiperRooms from "../SwiperRooms";
 import { Link, useParams } from "react-router-dom";
 import BookRoom from "./BookRoom";
+import { MdDelete } from "react-icons/md";
 
 const RoomDetails = () => {
   const { id } = useParams();
@@ -135,11 +136,11 @@ const RoomDetails = () => {
       </div>
       <div className="about-room-container">
         <div className="about-room">
-          <span>
+          <span className="edit-delete-buttons-field">
             <Link to={`edit/${room.id}`}>
-              <button className="btn">Edit</button>
+              <button className="btn"> <FaEdit className="icon"/>Edit</button>
             </Link>
-            <button className="btn">Delete</button>
+            <button className="btn"><MdDelete className="icon"/> Delete</button>
           </span>
           <div className="name flex">
             <span>
