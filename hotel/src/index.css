@@ -76,8 +76,13 @@ a {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 
@@ -177,7 +182,8 @@ a {
   padding: 0.7rem 2rem;
 }
 
-.profile-field , .profile-field p {
+.profile-field,
+.profile-field p {
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -211,6 +217,12 @@ a {
 .logout-container button:hover {
   background: #007bff;
   color: var(--color-white);
+}
+
+@media(max-width:450px) {
+  .nav_container .notification_plus_login {
+    display: none;
+  }
 }
 
 
@@ -316,13 +328,15 @@ a {
 }
 
 
-@media(max-width: 800px){
-  .nav_container .signin-signup{
+@media(max-width: 800px) {
+  .nav_container .signin-signup {
     display: none;
   }
+
   .sideBar-container {
     width: 300px;
   }
+
   .search_container {
     width: 100%;
   }
@@ -370,14 +384,16 @@ a {
   gap: 1rem;
 }
 
-form input,textarea {
+form input,
+textarea {
   border: 2px solid #197cf54d;
   padding: 0.8rem;
   width: 100%;
   border-radius: 0.5rem;
 }
 
-form input:focus,textarea:focus {
+form input:focus,
+textarea:focus {
   box-shadow: 0 0 0px 3px #197cf54d;
   border: 2px solid var(--color-blue);
 }
@@ -477,7 +493,8 @@ form input:focus,textarea:focus {
   padding: 11% 5%;
 }
 
-.banner-container h1, .banner-container p {
+.banner-container h1,
+.banner-container p {
   font-size: 5vw;
   background-clip: text !important;
   color: transparent;
@@ -639,6 +656,7 @@ form input:focus,textarea:focus {
     display: grid !important;
     grid-template-columns: 1fr 1fr;
   }
+
   .card h2 {
     font-size: 1.3rem !important;
   }
@@ -672,10 +690,12 @@ form input:focus,textarea:focus {
   .card li .icon {
     font-size: 1rem !important;
   }
+
   .rooms-container .cards-container {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+
   .rooms-container .card {
     display: flex !important;
   }
@@ -776,6 +796,7 @@ form input:focus,textarea:focus {
   border-radius: 1rem;
 }
 
+
 .dates-field span {
   padding: 0 1rem;
   width: 100%;
@@ -783,6 +804,18 @@ form input:focus,textarea:focus {
 
 .booking-card .dates-field span:first-child {
   border-right: 2px solid #ddd;
+}
+
+@media(max-width:450px) {
+  .booking-card .dates-field {
+    flex-direction: column;
+  }
+
+  .booking-card .dates-field span:first-child {
+    border-right: 0;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 1rem;
+  }
 }
 
 .dates-field span {
@@ -918,16 +951,20 @@ form input:focus,textarea:focus {
     padding: 0.5rem !important;
     font-size: 1.8rem !important;
   }
+
   .room-details-container h1 {
     font-size: 1.5rem;
   }
+
   .room-details-container .rooms-iamge-field {
     grid-template-columns: 1fr;
   }
+
   .rooms-iamge-field .image-right-field {
     gap: 0.5rem;
     border-radius: 0;
   }
+
   .rooms-iamge-field .image-left-field {
     border-radius: 0;
   }
@@ -1005,10 +1042,10 @@ form input:focus,textarea:focus {
 /* ========================add-room========================== */
 
 .add-room-container {
-    padding: 6.5rem 1rem 1rem 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  padding: 6.5rem 1rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .add-room-container form {
@@ -1016,7 +1053,8 @@ form input:focus,textarea:focus {
   flex-direction: column;
   gap: 2rem;
 }
-.add-room-container form .row{
+
+.add-room-container form .row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
@@ -1051,7 +1089,7 @@ form input:focus,textarea:focus {
   font-weight: 500;
 }
 
-.add-room-container .row2 .col label input{
+.add-room-container .row2 .col label input {
   width: 1rem;
   cursor: pointer;
   border-color: #197cf593;
@@ -1126,8 +1164,8 @@ form input:focus,textarea:focus {
 
 
 
-@media(max-width:700px){
-  .add-room-container form .row{
+@media(max-width:700px) {
+  .add-room-container form .row {
     grid-template-columns: 1fr;
   }
 }
@@ -1157,7 +1195,7 @@ form input:focus,textarea:focus {
 
 /* ====================error-page========================= */
 
-.error-page{
+.error-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1208,7 +1246,7 @@ form input:focus,textarea:focus {
 
 .booked-rooms {
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(500px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   gap: 1rem;
 }
 
@@ -1243,7 +1281,7 @@ form input:focus,textarea:focus {
   border: 1px solid var(--color-blue);
 }
 
-.booked-rooms .card img{
+.booked-rooms .card img {
   width: 100%;
   border-radius: 0.5rem;
 }
@@ -1339,19 +1377,22 @@ form input:focus,textarea:focus {
   gap: 1rem;
 }
 
-.social-icons .social-icon{
+.social-icons .social-icon {
   font-size: 1.5rem;
 }
 
 .social-icons a:first-child {
   color: var(--color-blue);
 }
+
 .social-icons a:nth-child(2) {
   color: #fa3451;
 }
+
 .social-icons a:nth-child(3) {
   color: #0b26f3;
 }
+
 .social-icons a:first-child {
   color: var(--color-blue);
 }
@@ -1372,6 +1413,7 @@ form input:focus,textarea:focus {
   .play-pause {
     width: 20dvw;
   }
+
   .child-footer {
     grid-template-columns: 1fr;
   }

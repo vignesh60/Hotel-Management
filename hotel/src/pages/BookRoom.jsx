@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "./UserContext";
 import axios from "axios";
 
-const BookRoom = ({ price, r_image ,roomName}) => {
+const BookRoom = ({ price, r_image, roomName }) => {
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
   const [user, setUser] = useState(false);
@@ -33,9 +33,11 @@ const BookRoom = ({ price, r_image ,roomName}) => {
   const getEarliestAvailableDate = () => {
     const today = new Date();
     bookedDates.forEach((bookedDate) => {
-      const endDate = new Date(bookedDate.check_out_date);
-      if (endDate > today) {
-        today.setDate(endDate.getDate() + 1);
+      if (roomName === bookedDate.room_name) {
+        const endDate = new Date(bookedDate.check_out_date);
+        if (endDate > today) {
+          today.setDate(endDate.getDate() + 1);
+        }
       }
     });
 
@@ -47,7 +49,6 @@ const BookRoom = ({ price, r_image ,roomName}) => {
 
     return `${today.getFullYear()}-${month}-${day}`;
   };
-
 
   const earliestAvailableDate = getEarliestAvailableDate();
 
@@ -94,30 +95,37 @@ const BookRoom = ({ price, r_image ,roomName}) => {
     }
   });
   const handleBook = async () => {
-    if (user) {
-      const confirmbook = window.confirm(
-        "Are you sure you want to book this room?"
-      );
-      if (confirmbook) {
-        const bookingData = {
-          user_name: userinfo.username,
-          user_email: userinfo.useremail,
-          total_cost: calculateTotalPrice(),
-          check_in_date: checkInDate,
-          check_out_date: checkOutDate,
-          room_image: r_image,
-          room_name: roomName
-        };
-
-        try {
-          const res = await axios.post("http://localhost:5000/bookRoom", bookingData);
-          alert("Booking successful");
-        } catch (error) {
-          console.error("Error booking the room:", error);
-        }
-      }
+    if (!checkInDate || !checkOutDate) {
+      alert("Give the ckeck-in and check-out dates");
     } else {
-      navigate("/signin");
+      if (user) {
+        const confirmbook = window.confirm(
+          "Are you sure you want to book this room?"
+        );
+        if (confirmbook) {
+          const bookingData = {
+            user_name: userinfo.username,
+            user_email: userinfo.useremail,
+            total_cost: calculateTotalPrice(),
+            check_in_date: checkInDate,
+            check_out_date: checkOutDate,
+            room_image: r_image,
+            room_name: roomName,
+          };
+
+          try {
+            const res = await axios.post(
+              "http://localhost:5000/bookRoom",
+              bookingData
+            );
+            alert("Booking successful");
+          } catch (error) {
+            console.error("Error booking the room:", error);
+          }
+        }
+      } else {
+        navigate("/signin");
+      }
     }
   };
 
@@ -190,13 +198,16 @@ const BookRoom = ({ price, r_image ,roomName}) => {
             ${calculateTotalPrice()}
           </p>
         </span>
-        <button className="btn" onClick={handleBook} disabled={!checkInDate || !checkOutDate}>
+        <button
+          className="btn"
+          onClick={handleBook}
+          /* disabled={!checkInDate || !checkOutDate} */
+        >
           Continue to Book
         </button>
       </div>
     </div>
   );
 };
-
 
 export default BookRoom;

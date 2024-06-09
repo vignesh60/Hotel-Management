@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Rooms from "../components/rooms";
-import { Link } from "react-router-dom";
-import { IoBedOutline } from "react-icons/io5";
-import { HiOutlineUser } from "react-icons/hi2";
-import { TbArrowAutofitHeight } from "react-icons/tb";
 import axios from "axios";
 
 const DashBoard = () => {
   const [images, setImages] = useState(Rooms[7].room);
+  const [loading, setLoading] = useState(true);
   const [bookedDates, setBookedDates] = useState([]);
   useEffect(() => {
     const fetchBookedDates = async () => {
       try {
         const res = await axios.get("http://localhost:5000/getBookings");
         setBookedDates(res.data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching booked dates:", error);
       }
@@ -21,6 +19,19 @@ const DashBoard = () => {
 
     fetchBookedDates();
   }, []);
+
+  const LoadingSpinner = () => <div className="spinner"></div>;
+
+  if (loading) {
+    return (
+      <div
+        style={{ paddingTop: "5rem", textAlign: "center" }}
+        className="spinner-field"
+      >
+        <LoadingSpinner />
+      </div>
+    );
+  }
   return (
     <div className="dashboard-container">
       <h1 className="colored-text">Dashboard</h1>

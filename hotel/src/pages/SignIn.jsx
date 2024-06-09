@@ -98,6 +98,7 @@ const SignIn = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className="input-box">
@@ -107,6 +108,7 @@ const SignIn = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
+                  required
                 />
               </div>
               <small>
