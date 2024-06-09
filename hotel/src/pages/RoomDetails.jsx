@@ -195,7 +195,7 @@ const navigate = useNavigate();
             </p>
           </div>
         </div>
-        <BookRoom price={room.price} />
+        <BookRoom price={room.price} r_image={`http://localhost:5000/uploads/${images[matchingIndexes[0]]}`} roomName = {room.title}/>
       </div>
 
       <div className="amenities-rationg-other-details">

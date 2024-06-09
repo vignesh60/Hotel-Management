@@ -429,6 +429,68 @@ app.get("/images", (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+/* ================roombooking=============================== */
+
+
+app.post("/bookRoom", (req, res) => {
+  const {
+    user_name,
+    user_email,
+    total_cost,
+    check_in_date,
+    check_out_date,
+    room_image,
+    room_name,
+  } = req.body;
+
+  const sql =
+    "INSERT INTO hotel_rooms_bookings (user_name, user_email, total_cost, check_in_date, check_out_date, room_image, room_name) VALUES (?, ?, ?, ?, ?, ?, ?)";
+  const values = [
+    user_name,
+    user_email,
+    total_cost,
+    check_in_date,
+    check_out_date,
+    room_image,
+    room_name,
+  ];
+
+  roomdb.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Error inserting booking details:", err);
+      res.status(500).send("Error inserting booking details");
+      return;
+    }
+    res.status(200).send("Booking successful");
+  });
+});
+
+
+
+app.get("/getBookings", (req, res) => {
+  const query = "SELECT * FROM hotel_rooms_bookings";
+  roomdb.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching bookings:", err);
+      res.status(500).send("Error fetching bookings");
+      return;
+    }
+    res.json(results);
+  });
+});
+
+
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

@@ -1,58 +1,136 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "./UserContext";
+import axios from "axios";
 
-const BookRoom = ({ price }) => {
-    const [checkInDate, setCheckInDate] = useState('');
-    const [checkOutDate, setCheckOutDate] = useState('');
-  
-    const perNightPrice = price; 
-    const weeklyDiscount = 28; 
-    const cleaningFee = 62; 
-    const serviceFee = 83; 
-    const occupancyTaxesAndFees = 29;
-  
+const BookRoom = ({ price, r_image ,roomName}) => {
+  const [checkInDate, setCheckInDate] = useState("");
+  const [checkOutDate, setCheckOutDate] = useState("");
+  const [user, setUser] = useState(false);
+  const [bookedDates, setBookedDates] = useState([]);
+  const navigate = useNavigate();
+  const { userinfo } = useContext(UserContext);
 
-    const getTodayDateString = () => {
-        const today = new Date();
-        let month = today.getMonth() + 1;
-        let day = today.getDate();
-    
-        month = month < 10 ? `0${month}` : month;
-        day = day < 10 ? `0${day}` : day;
-    
-        return `${today.getFullYear()}-${month}-${day}`;
-      };
+  const perNightPrice = price;
+  const weeklyDiscount = 28;
+  const cleaningFee = 62;
+  const serviceFee = 83;
+  const occupancyTaxesAndFees = 29;
+
+  useEffect(() => {
+    const fetchBookedDates = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/getBookings");
+        setBookedDates(res.data);
+      } catch (error) {
+        console.error("Error fetching booked dates:", error);
+      }
+    };
+
+    fetchBookedDates();
+  }, []);
+
+  const getEarliestAvailableDate = () => {
+    const today = new Date();
+    bookedDates.forEach((bookedDate) => {
+      const endDate = new Date(bookedDate.check_out_date);
+      if (endDate > today) {
+        today.setDate(endDate.getDate() + 1);
+      }
+    });
+
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+
+    month = month < 10 ? `0${month}` : month;
+    day = day < 10 ? `0${day}` : day;
+
+    return `${today.getFullYear()}-${month}-${day}`;
+  };
 
 
-    const handleCheckInChange = (e) => {
-      setCheckInDate(e.target.value);
-      setCheckOutDate('');
-    };
-  
-    const handleCheckOutChange = (e) => {
-      setCheckOutDate(e.target.value);
-    };
-  
-    const calculateTotalPrice = () => {
-      const numberOfNights = calculateNumberOfNights();
-  
-      const subtotal = perNightPrice * numberOfNights;
-  
-      const total = subtotal - weeklyDiscount + cleaningFee + serviceFee + occupancyTaxesAndFees;
-  
-      return total;
-    };
-  
-    const calculateNumberOfNights = () => {
-      if (!checkInDate || !checkOutDate) return 0;
-  
-      const oneDay = 24 * 60 * 60 * 1000; 
-      const startDate = new Date(checkInDate);
-      const endDate = new Date(checkOutDate);
-  
-      const diffDays = Math.round(Math.abs((startDate - endDate) / oneDay));
-  
-      return diffDays+1;
-    };
+  const earliestAvailableDate = getEarliestAvailableDate();
+
+  const handleCheckInChange = (e) => {
+    setCheckInDate(e.target.value);
+    setCheckOutDate("");
+  };
+
+  const handleCheckOutChange = (e) => {
+    setCheckOutDate(e.target.value);
+  };
+
+  const calculateTotalPrice = () => {
+    const numberOfNights = calculateNumberOfNights();
+
+    const subtotal = perNightPrice * numberOfNights;
+
+    const total =
+      subtotal -
+      weeklyDiscount +
+      cleaningFee +
+      serviceFee +
+      occupancyTaxesAndFees;
+
+    return total;
+  };
+
+  const calculateNumberOfNights = () => {
+    if (!checkInDate || !checkOutDate) return 0;
+
+    const oneDay = 24 * 60 * 60 * 1000;
+    const startDate = new Date(checkInDate);
+    const endDate = new Date(checkOutDate);
+
+    const diffDays = Math.round(Math.abs((startDate - endDate) / oneDay));
+
+    return diffDays + 1;
+  };
+
+  useEffect(() => {
+    const getLocal = localStorage.getItem("isLogin");
+    if (getLocal) {
+      setUser(true);
+    }
+  });
+  const handleBook = async () => {
+    if (user) {
+      const confirmbook = window.confirm(
+        "Are you sure you want to book this room?"
+      );
+      if (confirmbook) {
+        const bookingData = {
+          user_name: userinfo.username,
+          user_email: userinfo.useremail,
+          total_cost: calculateTotalPrice(),
+          check_in_date: checkInDate,
+          check_out_date: checkOutDate,
+          room_image: r_image,
+          room_name: roomName
+        };
+
+        try {
+          const res = await axios.post("http://localhost:5000/bookRoom", bookingData);
+          alert("Booking successful");
+        } catch (error) {
+          console.error("Error booking the room:", error);
+        }
+      }
+    } else {
+      navigate("/signin");
+    }
+  };
+
+  /* const isDateBooked = (date) => {
+    return bookedDates.some((bookedDate) => {
+      const startDate = new Date(bookedDate.check_in_date);
+      const endDate = new Date(bookedDate.check_out_date);
+      const currentDate = new Date(date);
+
+      return currentDate >= startDate && currentDate <= endDate;
+    });
+  }; */
+
   return (
     <div className="cost-and-book">
       <div className="booking-card">
@@ -67,7 +145,9 @@ const BookRoom = ({ price }) => {
               id="checkIn"
               value={checkInDate}
               onChange={handleCheckInChange}
-              min={getTodayDateString()}
+              min={earliestAvailableDate}
+              required
+              /* disabled={isDateBooked(checkInDate)} */
             />
           </span>
           <span>
@@ -78,6 +158,8 @@ const BookRoom = ({ price }) => {
               value={checkOutDate}
               onChange={handleCheckOutChange}
               min={checkInDate}
+              required
+              /* disabled={isDateBooked(checkOutDate)} */
             />
           </span>
         </div>
@@ -108,10 +190,13 @@ const BookRoom = ({ price }) => {
             ${calculateTotalPrice()}
           </p>
         </span>
-        <button className="btn">Continue to Book</button>
+        <button className="btn" onClick={handleBook} disabled={!checkInDate || !checkOutDate}>
+          Continue to Book
+        </button>
       </div>
     </div>
   );
 };
+
 
 export default BookRoom;

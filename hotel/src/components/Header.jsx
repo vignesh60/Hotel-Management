@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "./assets/logo.png";
 import { IoSearchOutline } from "react-icons/io5";
 import { IoNotificationsOutline } from "react-icons/io5";
-import Profile from "./assets/person5.jpeg";
+import Profile from "./assets/profile.png";
 import { HiMiniBars3 } from "react-icons/hi2";
 import $ from "jquery";
 import { IoIosArrowDown } from "react-icons/io";
