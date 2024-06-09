@@ -36,7 +36,10 @@ const SideBar = () => {
     >
       <div className="sideBar-container">
         <div className="close-icon-div">
-          <img src={Logo} alt="" className="site-logo" />
+          <span className="nav_logo">
+            <img src={Logo} alt="" className="site-logo" />
+            <p className="logo-text colored-text">LuxeStay</p>
+          </span>
           <IoCloseOutline
             className="close-icon"
             onClickCapture={() => handleSideBar()}

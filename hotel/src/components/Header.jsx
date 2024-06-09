@@ -67,7 +67,7 @@ const Header = () => {
           <HiMiniBars3 className="bar-icon" onClick={() => handleSideBar()} />
           <Link to="/" className="nav_logo">
             <img src={Logo} alt="Navbar logo" className="site-logo" />
-            {/* LuxeStay */}
+            <p className="logo-text colored-text">LuxeStay</p>
           </Link>
         </div>
         <div className="search_container">
