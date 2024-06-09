@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaEdit, FaStar } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa6";
@@ -19,8 +19,10 @@ import SwiperRooms from "../SwiperRooms";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import BookRoom from "./BookRoom";
 import { MdDelete } from "react-icons/md";
+import { UserContext } from "./UserContext";
 
 const RoomDetails = () => {
+  const {userinfo} = useContext(UserContext);
   const { id } = useParams();
 const navigate = useNavigate();
   const roomId = id;
@@ -162,7 +164,7 @@ const navigate = useNavigate();
       </div>
       <div className="about-room-container">
         <div className="about-room">
-          {account && (
+          {account && userinfo.useremail === "vigneshg.22cse@kongu.edu" &&  (
             <span className="edit-delete-buttons-field">
               <Link to={`edit/${room.id}`}>
                 <button className="btn">
