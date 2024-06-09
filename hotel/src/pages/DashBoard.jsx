@@ -45,10 +45,18 @@ const DashBoard = () => {
                 Total Const : <b>$ {card.total_cost}</b>
               </p>
               <div className="booked-person">
-                <h5>CheckIn Date: {card.check_in_date}</h5>
-                <h5>CheckIn Date: {card.check_out_date}</h5>
-                <h2>Booked by {card.user_name}</h2>
-                <button>Booked</button>
+                <h5>
+                  CheckIn Date:{" "}
+                  {new Date(card.check_in_date).toISOString().slice(0, 10)}
+                </h5>
+                <h5>
+                  CheckIn Date:{" "}
+                  {new Date(card.check_out_date).toISOString().slice(0, 10)}
+                </h5>
+                <h3 className="mail_id">Mail id: {card.user_email}</h3>
+                <h2>
+                  <button>Booked</button> by {card.user_name}
+                </h2>
               </div>
             </div>
           </div>

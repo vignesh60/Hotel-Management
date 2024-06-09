@@ -89,8 +89,10 @@ app.post("/register", (req, res) => {
 });
 
 
+
+
 app.get("/getUser/:email", (req, res) => {
-  const email = req.params.email; // Use req.params.email
+  const email = req.params.email; 
   db.query(
     "SELECT * FROM users WHERE email = ?",
     [email],
@@ -104,6 +106,8 @@ app.get("/getUser/:email", (req, res) => {
     }
   );
 });
+
+
 
 
 app.post("/login", (req, res) => {
@@ -215,7 +219,6 @@ app.post("/addRoom", (req, res) => {
     const securityCamerasInt = security_cameras ? 1 : 0;
     const bicyclesInt = bicycles ? 1 : 0;
 
-    // Prepare room object to insert into database
     const roomData = {
       title,
       location,
@@ -236,7 +239,7 @@ app.post("/addRoom", (req, res) => {
       dryer: dryerInt,
       security_cameras: securityCamerasInt,
       bicycles: bicyclesInt,
-      images: JSON.stringify(images), // Store images as JSON array
+      images: JSON.stringify(images),
     };
 
     roomdb.query("INSERT INTO rooms SET ?", roomData, (err, result) => {
@@ -271,7 +274,7 @@ app.get("/getRoom/:roomId", (req, res) => {
       return;
     }
     if (result.length > 0) {
-      res.json(result[0]); // Return the first row (assuming roomId is unique)
+      res.json(result[0]); 
     } else {
       res.status(404).send("Room not found");
     }
@@ -290,7 +293,7 @@ app.get("/getRooms", (req, res) => {
       return;
     }
     if (results.length > 0) {
-      res.json(results); // Return all rows from the rooms table
+      res.json(results);
     } else {
       res.status(404).send("No rooms found");
     }
@@ -411,7 +414,6 @@ app.delete("/deleteRoom/:roomId", (req, res) => {
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const fs = require('fs');
-const { log } = require('console');
 
 app.get("/images", (req, res) => {
   fs.readdir(path.join(__dirname, "uploads"), (err, files) => {

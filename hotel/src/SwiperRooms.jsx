@@ -65,7 +65,7 @@ const SwiperRooms = () => {
               </span>
                 <Link to={`roomdetails/${index+1}`}>
                 <div className="info">
-                  <h2>Well Furnished Apartment</h2>
+                  <h2>Room</h2>
                   <span className="rating-field">
                     <span className="rating">
                       4.5 <FaStar />

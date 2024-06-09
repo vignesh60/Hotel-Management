@@ -1250,18 +1250,24 @@ textarea:focus {
   gap: 1rem;
 }
 
+.dashboard-container .booked-person {
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
 .booked-rooms h2 {
   font-size: 1.1rem;
   font-weight: 600;
 }
 
-.booked-rooms p {
+.booked-rooms .total-cost {
   color: var(--color-blue);
   font-size: 1.2rem !important;
 }
 
 .booked-rooms h5 {
-  color: var(--color-yellow);
+  color: #6d09f9;
   font-weight: 500;
 }
 
@@ -1303,6 +1309,25 @@ textarea:focus {
   align-items: center;
   gap: 0.6rem;
   padding: 0.7rem 1.3rem !important;
+}
+
+.mail_id {
+  font-size: 1rem !important;
+  font-weight: 500;
+}
+
+
+
+@media(max-width:640px){
+  .booked-rooms .card {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 0.5rem;
+    font-size: 0.7rem !important;
+  }
+  .booked-rooms {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
 }
 
 

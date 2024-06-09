@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoCloseOutline, IoHome } from "react-icons/io5";
 import $ from "jquery";
 import { Link } from "react-router-dom";
@@ -9,8 +9,11 @@ import { RiDashboardFill } from "react-icons/ri";
 import { BiSolidOffer } from "react-icons/bi";
 import { PiSignInBold } from "react-icons/pi";
 import { LiaSignInAltSolid } from "react-icons/lia";
+import { UserContext } from "../pages/UserContext";
 
 const SideBar = () => {
+  const mailid = "vigneshg.22cse@kongu.edu";
+  const { userinfo } = useContext(UserContext);
   const handleSideBar = () => {
     setTimeout(() => {
       $(".main-container").css({ display: "none" });
@@ -43,35 +46,32 @@ const SideBar = () => {
         <div className="child-container">
           <div className="categories">
             <ul>
-              {account && (
-                <Link
-                  to="dashboard"
-                  style={{ textDecoration: "none", color: "#fff" }}
-                >
-                  <li>
-                    <RiDashboardFill className="icons" /> Dashboard
-                  </li>
-                </Link>
+              {account && userinfo.useremail === mailid && (
+                <>
+                  <Link
+                    to="dashboard"
+                    style={{ textDecoration: "none", color: "#fff" }}
+                  >
+                    <li>
+                      <RiDashboardFill className="icons" /> Dashboard
+                    </li>
+                  </Link>
+                  <Link
+                    to="addroom"
+                    style={{ textDecoration: "none", color: "#fff" }}
+                  >
+                    <li>
+                      <IoBed className="icons" /> Add Room
+                    </li>
+                  </Link>
+                </>
               )}
-              <Link
-                  to="/"
-                  style={{ textDecoration: "none", color: "#fff" }}
-                >
-                  <li>
-                    <IoHome className="icons" /> 
-                    Home
-                  </li>
-                </Link>
-              {account && (
-                <Link
-                  to="addroom"
-                  style={{ textDecoration: "none", color: "#fff" }}
-                >
-                  <li>
-                    <IoBed className="icons" /> Add Room
-                  </li>
-                </Link>
-              )}
+              <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
+                <li>
+                  <IoHome className="icons" />
+                  Home
+                </li>
+              </Link>
               <Link
                 to="roomslist"
                 style={{ textDecoration: "none", color: "#fff" }}
