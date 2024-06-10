@@ -36,7 +36,10 @@ const SignIn = () => {
           localStorage.setItem('isLogin','true');
           localStorage.setItem('email',formData.email);
           alert('Login successful');
-          window.location.reload();
+          setTimeout(()=> {
+            navigate("/");
+            window.location.reload();
+          },500);
       } catch (error) {
           //console.error(error.response.data);
           setError("User not found");

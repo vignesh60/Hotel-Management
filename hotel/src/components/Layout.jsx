@@ -7,9 +7,9 @@ import SignIn from "../pages/SignIn";
 import SideBar from "./SideBar";
 import $ from "jquery";
 import { UserProvider } from "../pages/UserContext";
+import Home from "../pages/Home";
 
 const Layout = () => {
-  const location = useLocation();
   const [isAuthRoute, setIsAuthRoute] = useState(true);
   useEffect(() => {
     const storedLoginState = localStorage.getItem("isLogin");
@@ -26,10 +26,11 @@ const Layout = () => {
     <>
       <UserProvider>
         <Header />
-        {isAuthRoute && <SignUp />}
         {isAuthRoute && <SignIn />}
+        {isAuthRoute && <SignUp />}
+        {isAuthRoute && <Home />}
         <SideBar />
-        <Outlet />
+        {!isAuthRoute && <Outlet />}
         <Footer />
       </UserProvider>
     </>
