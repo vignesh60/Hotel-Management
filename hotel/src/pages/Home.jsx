@@ -6,36 +6,14 @@ import { TbArrowAutofitHeight } from "react-icons/tb";
 import { FaStar } from "react-icons/fa";
 import { MdFavoriteBorder } from "react-icons/md";
 import { MdFavorite } from "react-icons/md";
-import room1 from "../components/assets/room (1).png";
-import room2 from "../components/assets/room (2).png";
-import room3 from "../components/assets/room (3).png";
-import room4 from "../components/assets/room (4).png";
-import room5 from "../components/assets/room (5).png";
-import room6 from "../components/assets/room (6).png";
-import room9 from "../components/assets/room (9).png";
-import room8 from "../components/assets/room (8).png";
-import room10 from "../components/assets/room (10).png";
 import swimming from "../components/assets/room (7).png";
 import { Link } from "react-router-dom";
 import SwiperRooms from "../SwiperRooms";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import $ from "jquery";
 
 const Home = () => {
-  const [cards, setCards] = useState([
-    room10,
-    room1,
-    room2,
-    room3,
-    room4,
-    room5,
-    room6,
-    room9,
-    room8,
-  ]);
-
   const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
@@ -122,8 +100,8 @@ const Home = () => {
           for your next getaway
         </h1>
         <p>
-          Discover thousands of hotel rooms
-          <br /> suited to every preference, worldwide
+          Discover all luxurious hotel rooms
+          <br /> book your desired room from anywhere
         </p>
       </div>
       <div className="luxurious-room">
@@ -199,17 +177,18 @@ const Home = () => {
 
       <div className="discover-more-field luxurious-room">
         <div className="left-field">
-          <h1 className="colored-text">Explore Property Rental Options</h1>
+          <h1 className="colored-text">Discover Your Perfect Hotel Room</h1>
           <p>
-            Discover a wide range of properties available for rent. Whether
-            you're looking for a cozy apartment, a spacious villa, or a charming
-            cottage, we have something for every traveler.
+            Explore a wide range of hotel rooms available for booking. Whether
+            you're looking for a cozy single room, a luxurious suite, or a
+            family-friendly space, we have something for every traveler.
           </p>
           <p>
-            Our properties are located in prime locations across the globe,
-            ensuring you find the perfect accommodation for your next adventure.
+            Our hotels are located in prime locations across the globe, ensuring
+            you find the perfect accommodation for your next adventure.
           </p>
-          <button className="btn">View Rentals</button>
+
+          <button className="btn">Explore</button>
         </div>
         <div className="right-field">
           <img src={swimming} alt="loading" />

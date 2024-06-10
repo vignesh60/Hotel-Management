@@ -205,7 +205,6 @@ app.post("/addRoom", (req, res) => {
     // Extract uploaded image URLs
     const images = req.files.map((file) => `/uploads/${file.filename}`);
 
-    console.log(req.files);
 
     // Convert boolean fields to integers
     const gardenViewInt = garden_view ? 1 : 0;
