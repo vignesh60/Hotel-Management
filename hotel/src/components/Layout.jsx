@@ -26,11 +26,11 @@ const Layout = () => {
     <>
       <UserProvider>
         <Header />
+        <SideBar />
         {isAuthRoute && <SignIn />}
         {isAuthRoute && <SignUp />}
-        {isAuthRoute && <Home />}
-        <SideBar />
-        {!isAuthRoute && <Outlet />}
+        {/* {isAuthRoute && <Home />} */}
+        <Outlet />
         <Footer />
       </UserProvider>
     </>
