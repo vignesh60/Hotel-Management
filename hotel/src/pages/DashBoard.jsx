@@ -6,6 +6,7 @@ const DashBoard = () => {
   const [images, setImages] = useState(Rooms[7].room);
   const [loading, setLoading] = useState(true);
   const [bookedDates, setBookedDates] = useState([]);
+
   useEffect(() => {
     const fetchBookedDates = async () => {
       try {
@@ -32,6 +33,7 @@ const DashBoard = () => {
       </div>
     );
   }
+
   return (
     <div className="dashboard-container">
       <h1 className="colored-text">Dashboard</h1>
@@ -42,21 +44,34 @@ const DashBoard = () => {
             <div className="info">
               <h2>{card.room_name}</h2>
               <p className="total-cost">
-                Total Const : <b>$ {card.total_cost}</b>
+                Total Cost: <b>$ {card.total_cost}</b>
               </p>
               <div className="booked-person">
                 <h5>
-                  CheckIn Date:{" "}
+                  Check-In Date:{" "}
                   {new Date(card.check_in_date).toISOString().slice(0, 10)}
                 </h5>
                 <h5>
-                  CheckIn Date:{" "}
+                  Check-Out Date:{" "}
                   {new Date(card.check_out_date).toISOString().slice(0, 10)}
                 </h5>
                 <h3 className="mail_id">Mail id: {card.user_email}</h3>
-                <h2>
-                  <button>Booked</button> by {card.user_name}
-                </h2>
+                {card.status === "Cancelled" ? (
+                  <>
+                    <h2>
+                      <button style={{ background: "red", color: "white" }}>
+                        Cancelled
+                      </button>{" "}
+                      by {card.user_name}
+                    </h2>
+                    <h5>Refund Amount: ${card.refund}</h5> <br />
+                    <h5>Cancelled on: {card.cancelledDate}</h5>
+                  </>
+                ) : (
+                  <h2>
+                    <button>Booked</button> by {card.user_name}
+                  </h2>
+                )}
               </div>
             </div>
           </div>

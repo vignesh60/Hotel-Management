@@ -491,6 +491,67 @@ app.get("/getBookings", (req, res) => {
 });
 
 
+app.get("/getBookings/:email", (req, res) => {
+  const email = req.params.email;
+  const query = "SELECT * FROM hotel_rooms_bookings WHERE user_email = ?";
+
+  roomdb.query(query, [email], (err, results) => {
+    if (err) {
+      console.error("Error fetching bookings:", err);
+      res.status(500).send("Error fetching bookings");
+      return;
+    }
+    res.json(results);
+  });
+});
+
+
+app.post("/cancelBooking", (req, res) => {
+  const { id, checkInDate, totalCost } = req.body;
+  const currentDate = new Date();
+
+  // Parse the check-in date from the request body
+  const checkIn = new Date(checkInDate);
+
+  // Calculate the number of days remaining until check-in
+  const daysUntilCheckIn = Math.floor(
+    (checkIn - currentDate) / (1000 * 60 * 60 * 24)
+  );
+
+  // Calculate the refund based on the days until check-in
+  let refund = 0;
+
+  if (daysUntilCheckIn >= 1) {
+    refund = totalCost * 0.5; // 50% refund if canceled 1 day before
+  } else {
+    refund = 0; // No refund if canceled on the check-in day
+  }
+
+  // Get current date as cancellation date
+  const cancelledDate = currentDate.toISOString().slice(0, 10); // format as YYYY-MM-DD
+
+  // Prepare the query to update booking status, refund amount, and cancellation date
+  const query =
+    "UPDATE hotel_rooms_bookings SET status = 'Cancelled', refund = ?, cancelledDate = ? WHERE id = ?";
+
+  // Execute the query to update the booking in the database
+  roomdb.query(query, [refund, cancelledDate, id], (err) => {
+    if (err) {
+      console.error("Error canceling booking:", err);
+      res.status(500).send("Error canceling booking");
+      return;
+    }
+
+    // Send the response with success, refund, and cancellation date
+    res.json({ success: true, refund, cancelledDate });
+  });
+});
+
+
+
+
+
+
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
