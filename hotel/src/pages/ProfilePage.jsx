@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../pages/UserContext";
 import axios from "axios";
+import banner from "../components/assets/banner.png";
+import Profile from "../components/assets/profileImg.png";
 
 const ProfilePage = () => {
   const { userinfo } = useContext(UserContext);
@@ -20,7 +22,7 @@ const ProfilePage = () => {
     }
   }, [userinfo.useremail]);
 
-  const cancelBooking = (id, checkInDate, totalCost) => {
+  const cancelBooking = (id, checkInDate, totalCost,room_name,user_name, user_email) => {
     const confirmed = window.confirm(
       "Are you sure you want to cancel this booking?"
     );
@@ -31,6 +33,9 @@ const ProfilePage = () => {
           id,
           checkInDate,
           totalCost,
+          room_name,
+          user_name,
+          user_email
         })
         .then((response) => {
           if (response.data.success) {
@@ -60,10 +65,21 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="profile-container" style={{ paddingTop: "5.5rem" }}>
-      <h2>Profile</h2>
-      <p>Username: {userinfo.username}</p>
-      <p>Email: {userinfo.useremail}</p>
+    <div className="profile-container-field" style={{ paddingTop: "5.5rem" }}>
+      <div className="profile-container">
+        <div className="profile-field">
+          <div className="profile-banner">
+            <img src={banner} alt="banner" className="banner-image" />
+            <div className="profile-image">
+              <img src={Profile} alt="profilePic" />
+            </div>
+          </div>
+          <div className="short-info">
+            <h1>{userinfo.username}</h1>
+            <p>{userinfo.useremail}</p>
+          </div>
+        </div>
+      </div>
 
       <div className="dashboard-container">
         <h1 className="colored-text">Booking Details</h1>
@@ -97,11 +113,15 @@ const ProfilePage = () => {
                 {card.status !== "Cancelled" ? (
                   <button
                     className="cancel-btn"
+                    style={{ cursor: "pointer" }}
                     onClick={() =>
                       cancelBooking(
                         card.id,
                         card.check_in_date,
-                        card.total_cost
+                        card.total_cost,
+                        card.room_name,
+                        card.user_name,
+                        card.user_email
                       )
                     }
                   >

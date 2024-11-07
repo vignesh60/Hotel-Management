@@ -1,33 +1,34 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mysql = require('mysql2');
-const bcrypt = require('bcryptjs');
-const cors = require('cors');
-const multer = require('multer');
-const path = require('path');
+const express = require("express");
+const bodyParser = require("body-parser");
+const mysql = require("mysql2");
+const bcrypt = require("bcryptjs");
+const cors = require("cors");
+const multer = require("multer");
+const path = require("path");
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 const app = express();
 const port = 5000;
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static("./uploads"));
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '1234',
-    database: 'mydatabase'
-})
+  host: "localhost",
+  user: "root",
+  password: "1234",
+  database: "mydatabase",
+});
 
 const roomdb = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '1234',
-    database: 'hotel_rooms'
-})
-
+  host: "localhost",
+  user: "root",
+  password: "1234",
+  database: "hotel_rooms",
+});
 
 db.connect((err) => {
   if (err) {
@@ -37,7 +38,6 @@ db.connect((err) => {
   console.log("Connected to MySQL database");
 });
 
-
 roomdb.connect((err) => {
   if (err) {
     console.error("Error connecting to MySQL database");
@@ -45,8 +45,6 @@ roomdb.connect((err) => {
   }
   console.log("Connected to MySQL database");
 });
-
-
 
 app.post("/register", (req, res) => {
   const { name, email, password } = req.body;
@@ -88,27 +86,17 @@ app.post("/register", (req, res) => {
   });
 });
 
-
-
-
 app.get("/getUser/:email", (req, res) => {
-  const email = req.params.email; 
-  db.query(
-    "SELECT * FROM users WHERE email = ?",
-    [email],
-    (err, results) => {
-      if (err) {
-        console.error("Error fetching user details:", err);
-        res.status(500).send("Error fetching user details");
-      } else {
-        res.json(results);
-      }
+  const email = req.params.email;
+  db.query("SELECT * FROM users WHERE email = ?", [email], (err, results) => {
+    if (err) {
+      console.error("Error fetching user details:", err);
+      res.status(500).send("Error fetching user details");
+    } else {
+      res.json(results);
     }
-  );
+  });
 });
-
-
-
 
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
@@ -146,13 +134,6 @@ app.post("/login", (req, res) => {
   });
 });
 
-
-
-
-
-
-
-
 /* ------------------------adding-rooms----------------------- */
 
 const storage = multer.diskStorage({
@@ -168,9 +149,8 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({
-    storage: storage,
+  storage: storage,
 }).array("images", 10);
-
 
 app.post("/addRoom", (req, res) => {
   upload(req, res, function (err) {
@@ -204,7 +184,6 @@ app.post("/addRoom", (req, res) => {
 
     // Extract uploaded image URLs
     const images = req.files.map((file) => `/uploads/${file.filename}`);
-
 
     // Convert boolean fields to integers
     const gardenViewInt = garden_view ? 1 : 0;
@@ -253,17 +232,6 @@ app.post("/addRoom", (req, res) => {
   });
 });
 
-
-
-
-
-
-
-
-
-
-
-
 app.get("/getRoom/:roomId", (req, res) => {
   const roomId = req.params.roomId;
   roomdb.query("SELECT * FROM rooms WHERE id = ?", roomId, (err, result) => {
@@ -273,16 +241,12 @@ app.get("/getRoom/:roomId", (req, res) => {
       return;
     }
     if (result.length > 0) {
-      res.json(result[0]); 
+      res.json(result[0]);
     } else {
       res.status(404).send("Room not found");
     }
   });
 });
-
-
-
-
 
 app.get("/getRooms", (req, res) => {
   roomdb.query("SELECT * FROM rooms", (err, results) => {
@@ -298,15 +262,6 @@ app.get("/getRooms", (req, res) => {
     }
   });
 });
-
-
-
-
-
-
-
-
-
 
 /* -------------------------update--------------------------- */
 
@@ -379,13 +334,6 @@ app.put("/updateRoom/:roomId", (req, res) => {
   );
 });
 
-
-
-
-
-
-
-
 /* -----------------------------delete---------------------------------- */
 
 app.delete("/deleteRoom/:roomId", (req, res) => {
@@ -401,18 +349,9 @@ app.delete("/deleteRoom/:roomId", (req, res) => {
   });
 });
 
-
-
-
-
-
-
-
-
-
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-const fs = require('fs');
+const fs = require("fs");
 
 app.get("/images", (req, res) => {
   fs.readdir(path.join(__dirname, "uploads"), (err, files) => {
@@ -428,20 +367,17 @@ app.get("/images", (req, res) => {
   });
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* ================roombooking=============================== */
 
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
 
 app.post("/bookRoom", (req, res) => {
   const {
@@ -472,11 +408,82 @@ app.post("/bookRoom", (req, res) => {
       res.status(500).send("Error inserting booking details");
       return;
     }
-    res.status(200).send("Booking successful");
+
+    // Send email to user confirming booking
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: user_email,
+      subject: `Booking Confirmation for ${room_name}`,
+      text: `Dear ${user_name},\n\nYour booking for the room "${room_name}" has been confirmed.\nCheck-in Date: ${check_in_date}\nCheck-out Date: ${check_out_date}\nTotal Cost: $${total_cost}\n\nThank you for booking with us!\n\nBest regards,\nYour Hotel Team`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error(error);
+        res.status(500).send("Error sending booking confirmation email");
+      } else {
+        console.log("Booking confirmation email sent: " + info.response);
+        res.status(200).send("Booking successful and confirmation email sent");
+      }
+    });
   });
 });
 
+app.post("/cancelBooking", (req, res) => {
+  const { id, checkInDate, totalCost, user_email, user_name, room_name } =
+    req.body;
+  const currentDate = new Date();
 
+  const checkIn = new Date(checkInDate);
+
+  const daysUntilCheckIn = Math.floor(
+    (currentDate - checkIn) / (1000 * 60 * 60 * 24)
+  );
+
+  let refund = 0;
+
+  if (daysUntilCheckIn > 1) {
+    refund = totalCost * 0.5;
+  } else if (daysUntilCheckIn === 1) {
+    refund = totalCost * 0.45;
+  } else if (daysUntilCheckIn === 0) {
+    refund = totalCost;
+  } else {
+    refund = 0; 
+  }
+
+
+  const cancelledDate = currentDate.toISOString().slice(0, 10);
+
+  const query =
+    "UPDATE hotel_rooms_bookings SET status = 'Cancelled', refund = ?, cancelledDate = ? WHERE id = ?";
+
+
+  roomdb.query(query, [refund, cancelledDate, id], (err) => {
+    if (err) {
+      console.error("Error canceling booking:", err);
+      res.status(500).send("Error canceling booking");
+      return;
+    }
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: user_email,
+      subject: `Booking Cancellation for ${room_name}`,
+      text: `Dear ${user_name},\n\nWe regret to inform you that your booking for the room "${room_name}" has been canceled.\nCheck-in Date: ${checkInDate}\nRefund Amount: $${refund}\nCancellation Date: ${cancelledDate}\n\nWe apologize for the inconvenience caused.\n\nBest regards,\nYour Hotel Team`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error(error);
+        res.status(500).send("Error sending cancellation email");
+      } else {
+        console.log("Cancellation email sent: " + info.response);
+        res.json({ success: true, refund, cancelledDate });
+      }
+    });
+  });
+});
 
 app.get("/getBookings", (req, res) => {
   const query = "SELECT * FROM hotel_rooms_bookings";
@@ -489,7 +496,6 @@ app.get("/getBookings", (req, res) => {
     res.json(results);
   });
 });
-
 
 app.get("/getBookings/:email", (req, res) => {
   const email = req.params.email;
@@ -506,54 +512,6 @@ app.get("/getBookings/:email", (req, res) => {
 });
 
 
-app.post("/cancelBooking", (req, res) => {
-  const { id, checkInDate, totalCost } = req.body;
-  const currentDate = new Date();
-
-  // Parse the check-in date from the request body
-  const checkIn = new Date(checkInDate);
-
-  // Calculate the number of days remaining until check-in
-  const daysUntilCheckIn = Math.floor(
-    (checkIn - currentDate) / (1000 * 60 * 60 * 24)
-  );
-
-  // Calculate the refund based on the days until check-in
-  let refund = 0;
-
-  if (daysUntilCheckIn >= 1) {
-    refund = totalCost * 0.5; // 50% refund if canceled 1 day before
-  } else {
-    refund = 0; // No refund if canceled on the check-in day
-  }
-
-  // Get current date as cancellation date
-  const cancelledDate = currentDate.toISOString().slice(0, 10); // format as YYYY-MM-DD
-
-  // Prepare the query to update booking status, refund amount, and cancellation date
-  const query =
-    "UPDATE hotel_rooms_bookings SET status = 'Cancelled', refund = ?, cancelledDate = ? WHERE id = ?";
-
-  // Execute the query to update the booking in the database
-  roomdb.query(query, [refund, cancelledDate, id], (err) => {
-    if (err) {
-      console.error("Error canceling booking:", err);
-      res.status(500).send("Error canceling booking");
-      return;
-    }
-
-    // Send the response with success, refund, and cancellation date
-    res.json({ success: true, refund, cancelledDate });
-  });
-});
-
-
-
-
-
-
-
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
-
