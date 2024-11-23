@@ -31,7 +31,7 @@ const Home = () => {
     const fetchRoom = async () => {
       try {
         const res = await axios.get("http://localhost:5000/getRooms");
-        setRoom(res.data);
+        setRoom(res.data.reverse());
       } catch (error) {
         console.error("Error fetching room details: ", error);
       }
@@ -58,15 +58,14 @@ const Home = () => {
 
     const newMatchingIndexes = room
       .map((roomItem) => {
-        // Find the first index where the title matches the room's title
         const index = images.findIndex((image) => {
           const [title, filename] = image.split("+");
           return title === roomItem.title;
         });
 
-        return index !== -1 ? index : null; // Return index if found, otherwise null
+        return index !== -1 ? index : null;
       })
-      .filter((index) => index !== null); // Filter out null indexes
+      .filter((index) => index !== null);
 
     setMatchingIndexes(newMatchingIndexes);
   }, [room, images]);
