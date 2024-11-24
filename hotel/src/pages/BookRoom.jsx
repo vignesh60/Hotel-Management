@@ -2,6 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "./UserContext";
 import axios from "axios";
+import { IoIosCard } from "react-icons/io";
+import g_pay from "../components/assets/google-pay.png";
+import qrCode from "../components/assets/qr-code.jpg";
+import visa from "../components/assets/payment/visa.png";
+import mastercard from "../components/assets/payment/mastercard.png";
 
 const BookRoom = ({ price, r_image, roomName }) => {
   const [checkInDate, setCheckInDate] = useState("");
@@ -10,6 +15,8 @@ const BookRoom = ({ price, r_image, roomName }) => {
   const [bookedDates, setBookedDates] = useState([]);
   const navigate = useNavigate();
   const { userinfo } = useContext(UserContext);
+  const [paymentOption, setPaymentOption] = useState("");
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const perNightPrice = price;
   const weeklyDiscount = 28;
@@ -96,7 +103,7 @@ const BookRoom = ({ price, r_image, roomName }) => {
   });
   const handleBook = async () => {
     if (!checkInDate || !checkOutDate) {
-      alert("Give the ckeck-in and check-out dates");
+      alert("Provide the check-in and check-out dates");
     } else {
       if (user) {
         const confirmbook = window.confirm(
@@ -113,12 +120,13 @@ const BookRoom = ({ price, r_image, roomName }) => {
             room_name: roomName,
           };
 
+          setShowSuccessModal(true);
+
           try {
             const res = await axios.post(
               "http://localhost:5000/bookRoom",
               bookingData
             );
-            alert("Booking successful");
           } catch (error) {
             console.error("Error booking the room:", error);
           }
@@ -192,19 +200,85 @@ const BookRoom = ({ price, r_image, roomName }) => {
             <p>Occupancy taxes and fees</p> <p>${occupancyTaxesAndFees}</p>
           </li>
         </ul>
+
         <span className="total">
           <p>Total</p>
           <p style={{ color: "green", fontWeight: "500" }}>
             ${calculateTotalPrice()}
           </p>
         </span>
-        <button
-          className="btn"
-          onClick={handleBook}
-          /* disabled={!checkInDate || !checkOutDate} */
-        >
-          Continue to Book
-        </button>
+        <div>
+          <div className="payment-options">
+            <label>
+              <input
+                type="radio"
+                value="googlePay"
+                checked={paymentOption === "googlePay"}
+                onChange={() => setPaymentOption("googlePay")}
+              />
+              <img src={g_pay} alt="icon" className="g-pay" />
+              Google Pay
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="card"
+                checked={paymentOption === "card"}
+                onChange={() => setPaymentOption("card")}
+              />
+              <IoIosCard className="icon" /> Credit/Debit Card
+            </label>
+          </div>
+          {paymentOption === "googlePay" && (
+            <div className="payment-google-pay">
+              <p>Scan the QR code to pay:</p>
+              <img src={qrCode} alt="Google Pay QR Code" />
+            </div>
+          )}
+          {paymentOption === "card" && (
+            <div className="payment-card-form">
+              <div className="c-number-field">
+                <div className="input-field">
+                  <p>Card number</p>
+                  <input type="text" placeholder="Card Number" required />
+                </div>
+                <div className="pay-icons">
+                  <img src={visa} alt="visa" />
+                  <img src={mastercard} alt="mastercard" />
+                </div>
+              </div>
+              <div className="d-field">
+                <div className="input-field">
+                  Expiry date
+                  <input type="text" placeholder="(MM/YY)" required />
+                </div>
+                <div className="input-field">
+                  Security code
+                  <input type="text" placeholder="CVV" required />
+                </div>
+              </div>
+              <div className="input-field">
+                <p>Name on card</p>
+                <input type="text" placeholder="Name on Card" required />
+              </div>
+            </div>
+          )}
+          <button className="btn book-btn" onClick={() => handleBook()}>
+            Continue to Book
+          </button>
+        </div>
+        {showSuccessModal && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <h2>Booking Successful!</h2>
+              <p>
+                Your room has been successfully booked. Check your email for
+                details.
+              </p>
+              <button onClick={() => setShowSuccessModal(false)}>Close</button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
