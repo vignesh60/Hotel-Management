@@ -163,7 +163,6 @@ const BookRoom = ({ price, r_image, roomName }) => {
               onChange={handleCheckInChange}
               min={earliestAvailableDate}
               required
-              /* disabled={isDateBooked(checkInDate)} */
             />
           </span>
           <span>

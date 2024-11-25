@@ -11,10 +11,12 @@ const Footer = () => {
         <div className="logo">
           <img src={Logo} alt="Logo" style={{ maxWidth: "4rem" }} />
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Reprehenderit enim doloremque sint delectus soluta esse porro iste?
-            Suscipit veniam architecto in eaque, earum molestias eveniet eius
-            sed aut, dolor velit.
+            LuxStay: Your perfect getaway starts here! Book luxurious rooms with
+            top-notch amenities, unparalleled comfort, and excellent service.
+            Explore our wide range of accommodations to find your dream stay,
+            whether for a weekend escape, a business trip, or a family vacation.
+            Experience convenience, quality, and peace of mind with LuxStay.
+            Your satisfaction is our priority.
           </p>
         </div>
 

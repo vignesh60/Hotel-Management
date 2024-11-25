@@ -43,14 +43,13 @@ const ProfilePage = () => {
             const cancelledDate = response.data.cancelledDate;
             alert(`Your booking is cancelled. Refund amount: $${refundAmount}`);
 
-            // Update the booking status and show the refund amount and cancellation date
             const updatedBookings = bookings.map((booking) =>
               booking.booking_id === id
                 ? {
                     ...booking,
                     status: "Cancelled",
                     refund: refundAmount,
-                    cancelledDate: cancelledDate, // Store the cancelled date from response
+                    cancelledDate: cancelledDate,
                   }
                 : booking
             );
@@ -70,18 +69,14 @@ const ProfilePage = () => {
         <div className="profile-field">
           <div className="profile-banner">
             <img src={banner} alt="banner" className="banner-image" />
-            <div className="profile-image">
+           {/*  <div className="profile-image">
               <img src={Profile} alt="profilePic" />
-            </div>
+            </div> */}
           </div>
           <div className="short-info">
             <h1>{userinfo.username}</h1>
             <p>{userinfo.useremail}</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="dashboard-container">
+            <div className="dashboard-container">
         <h1 className="colored-text">Booking Details</h1>
         <div className="booked-rooms">
           {bookings.map((card, index) => (
@@ -141,6 +136,10 @@ const ProfilePage = () => {
           ))}
         </div>
       </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 };
