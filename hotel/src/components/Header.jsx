@@ -7,7 +7,7 @@ import Profile from "./assets/profile.png";
 import { HiMiniBars3 } from "react-icons/hi2";
 import $ from "jquery";
 import { IoIosArrowDown } from "react-icons/io";
-import { UserContext } from "../pages/UserContext"
+import { UserContext } from "../pages/UserContext";
 
 const Header = () => {
   const [account, setAccount] = useState(false);
@@ -18,7 +18,6 @@ const Header = () => {
       $(".sideBar-container").css({ transform: "translateX(0%)" });
     }, 10);
   };
-  
 
   useEffect(() => {
     const storedLoginState = localStorage.getItem("isLogin");
@@ -70,9 +69,21 @@ const Header = () => {
             <p className="logo-text colored-text">LuxeStay</p>
           </Link>
         </div>
-        <div className="search_container">
-          <input type="text" placeholder="search" />
-          <IoSearchOutline className="icon" />
+        <div>
+          <Link to="/search">
+            <div
+              className="btn"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "auto 0.5rem",
+                gap: "1rem",
+              }}
+            >
+              Search <IoSearchOutline className="icon" />
+            </div>
+          </Link>
         </div>
 
         {account ? (

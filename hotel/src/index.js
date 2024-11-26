@@ -11,6 +11,7 @@ import FetchRoom from "./pages/FetchRoom";
 import DashBoard from "./pages/DashBoard";
 import EditRoom from "./pages/EditRoom";
 import ProfilePage from "./pages/ProfilePage";
+import Search from "./pages/Search";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: "/dashboard", element: <DashBoard /> },
       { path: "/roomdetails/:id/edit/:id", element: <EditRoom /> },
       { path: "/profile", element: <ProfilePage /> },
+      { path: "/search", element: <Search /> },
     ],
   },
 ]);
