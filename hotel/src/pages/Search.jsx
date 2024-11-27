@@ -124,7 +124,7 @@ const Search = () => {
           <div className="cards-container">
             {filteredRooms.map((room, index) => (
               <div className="card" key={index}>
-                <Link to={`roomdetails/${room.id}`}>
+                <Link to={`/roomdetails/${room.id}`}>
                   <img
                     src={`http://localhost:5000/uploads/${
                       matchingIndexes[index] !== null
